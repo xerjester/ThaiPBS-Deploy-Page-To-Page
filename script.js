@@ -110,61 +110,48 @@
                 });
 
                 // =======================
-                // Scroll Button Logic (แก้ไขแล้ว)
+                // Scroll Button Logic (ฉบับแม่นยำ 100%)
                 // =======================
                 document.addEventListener('DOMContentLoaded', () => {
                     const scrollUpBtn = document.getElementById('scrollUpBtn');
                     const scrollDownBtn = document.getElementById('scrollDownBtn');
 
-                    let isScrolling = false;
-                    const delay = 100; // เพิ่มเวลา delay นิดหน่อยเพื่อให้ animation จบก่อนกดใหม่ได้
+                    // เก็บรายชื่อ Section ทั้งหมดที่ต้องการให้เลื่อนผ่าน
+                    // (คุณสามารถเพิ่ม class หรือ id อื่นๆ ที่เป็น section หลักได้ที่นี่)
+                    const sections = Array.from(document.querySelectorAll('header, section.full-section'));
 
-                    if (scrollUpBtn && scrollDownBtn) {
-                        scrollUpBtn.addEventListener('click', () => {
-                            if (isScrolling) return;
-                            isScrolling = true;
+                    if (!scrollUpBtn || !scrollDownBtn) return;
 
-                            const windowHeight = window.innerHeight;
-                            const currentScroll = window.scrollY;
+                    // ฟังก์ชันหา Section ปัจจุบันที่อยู่บนหน้าจอมากที่สุด
+                    function getCurrentSectionIndex() {
+                        const scrollY = window.scrollY + (window.innerHeight / 2); // จุดกึ่งกลางจอ
 
-                            // คำนวณหาตำแหน่งหน้าก่อนหน้า (Previous Page)
-                            // ใช้ Math.ceil เพื่อปัดเศษขึ้นก่อน แล้วลบ 1 หน้าจอ เพื่อให้มันดีดกลับไปหาจุดเริ่มของหน้าก่อนหน้า
-                            let targetY = (Math.ceil(currentScroll / windowHeight) - 1) * windowHeight;
-
-                            // ป้องกันไม่ให้ค่าติดลบ
-                            if (targetY < 0) targetY = 0;
-
-                            window.scrollTo({
-                                top: targetY,
-                                behavior: 'smooth'
-                            });
-
-                            setTimeout(() => {
-                                isScrolling = false;
-                            }, delay);
+                        // หา index ของ section ที่ครอบจุดกึ่งกลางจออยู่
+                        let index = sections.findIndex(sec => {
+                            const rect = sec.getBoundingClientRect();
+                            const absoluteTop = rect.top + window.scrollY;
+                            const absoluteBottom = absoluteTop + rect.height;
+                            return scrollY >= absoluteTop && scrollY < absoluteBottom;
                         });
 
-                        scrollDownBtn.addEventListener('click', () => {
-                            if (isScrolling) return;
-                            isScrolling = true;
-
-                            const windowHeight = window.innerHeight;
-                            const currentScroll = window.scrollY;
-
-                            // คำนวณหาตำแหน่งหน้าถัดไป (Next Page)
-                            // ใช้ Math.floor เพื่อปัดเศษลง (หาจุดเริ่มของหน้าปัจจุบัน) แล้วบวก 1 หน้าจอ
-                            let targetY = (Math.floor(currentScroll / windowHeight) + 1) * windowHeight;
-
-                            window.scrollTo({
-                                top: targetY,
-                                behavior: 'smooth'
-                            });
-
-                            setTimeout(() => {
-                                isScrolling = false;
-                            }, delay);
-                        });
+                        return index === -1 ? 0 : index;
                     }
+
+                    // ปุ่มเลื่อนขึ้น
+                    scrollUpBtn.addEventListener('click', () => {
+                        const currentIndex = getCurrentSectionIndex();
+                        if (currentIndex > 0) {
+                            sections[currentIndex - 1].scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+
+                    // ปุ่มเลื่อนลง
+                    scrollDownBtn.addEventListener('click', () => {
+                        const currentIndex = getCurrentSectionIndex();
+                        if (currentIndex < sections.length - 1) {
+                            sections[currentIndex + 1].scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
                 });
 
                 let slideIndex = 0;
@@ -265,3 +252,195 @@
                         }
                     });
                 });
+
+                const quizData = [{
+                        question: "1.คุณมีความโดดเด่นขนาดในกลุ่มเพื่อนอย่างไร ? ",
+                        options: [
+                            { text: "คุณเป็นคนตัวใหญ่ใจดีดูเป็นที่พึ่งพา", score: 1, fish: 0 },
+                            { text: "คุณดูสงบ หนักแน่น เป็นผู้นำที่สุขุม", score: 2, fish: 1 },
+                            { text: "คุณดูเงียบๆ แต่มีความลับซ่อนอยู่", score: 3, fish: 2 },
+                            {
+                                text: "คุณเป็นคนเรียบง่าย ไม่ชอบความวุ่นวายชอบซุ่ม ดูสถานการณ์ ",
+                                score: 4,
+                                fish: 3
+                            },
+                            {
+                                text: "คุณเป็นคนมีบุคลิกเฉพาะตัว บางครั้งก็มีมุมที่ดูแปลกหรือโดดเด่นไม่เหมือนใคร ",
+                                score: 5,
+                                fish: 4
+                            },
+                        ]
+                    },
+                    {
+                        question: "2.คุณเลือกทำกิจกรรมยามว่างแบบไหน?",
+                        options: [
+                            { text: "ทำกิจกรรมที่ต้องใช้พลังงานในสภาพ แวดล้อมที่ท้าทาย (เช่น เดินป่า ,ปีนเขา)", score: 1, fish: 0 },
+                            { text: "ผ่อนคลายในบรรยากาศสบายๆเงียบๆ ใกล้ชิดธรรมชาติ", score: 2, fish: 1 },
+                            { text: "ออกไปสำรวจหรือปาร์ตี้ในตอนกลางคืน", score: 3, fish: 2 },
+                            { text: "นั่งพักผ่อนและทำสมาธิคนเดียวอยู่กับพื้น", score: 4, fish: 3 },
+                            { text: "ศึกษาหาความรู้หรือทำกิจกรรมที่ ต้องใช้ความคิดวิเคราะห์", score: 5, fish: 4 }
+                        ]
+                    },
+                    {
+                        question: "3.คุณมีวิธีการรับมือกับความขัดแย้งอย่างไร?",
+                        options: [
+                            { text: "เน้นความสุภาพหลีกเลี่ยงการเผชิญหน้าโดยตรง", score: 1, fish: 0 },
+                            { text: "ใช้ความสงบสยบความเคลื่อนไหว ไม่ค่อยสนใจเรื่องวุ่นวาย", score: 2, fish: 1 },
+                            { text: "คอยสังเกตการณ์หากจำเป็นก็พร้อมป้องกันตัวเองอย่างรวดเร็ว", score: 3, fish: 2 },
+                            { text: "คุณจะนิ่งอยู่กับที่ ไม่ตอบโต้ แต่หากถูกจู่โจมก็มีวิธีป้องกันที่เด็ดขาด", score: 4, fish: 3 },
+                            { text: "ใช้เหตุผลและลักษณะที่โดดเด่นของคุณในการสร้างความน่าเชื่อถือ", score: 5, fish: 4 }
+                        ]
+                    },
+                    {
+                        question: "4.ถ้าให้เลือกอาหารมื้อหลัก คุณจะเลือกอะไร?",
+                        options: [
+                            { text: "อาหารที่มาจากพืชเป็นหลัก (มังสวิรัติ)", score: 1, fish: 0 },
+                            { text: "ผลไม้หรือของว่างหวานๆจากธรรมชาติ", score: 2, fish: 1 },
+                            {
+                                text: "อาหารรสจัด เนื้อสัตว์หรืออาหารที่ต้องใช้ \"การล่า\"",
+                                score: 3,
+                                fish: 2
+                            }, { text: "อาหารทะเลหรืออาหารที่ต้องแกะ", score: 4, fish: 3 },
+                            { text: "อาหารที่มีความหลากหลาย หรืออาหารที่ต้องใช้ความพยายามในการได้มา", score: 5, fish: 4 }
+                        ]
+                    },
+                    {
+                        question: "5.เมื่อต้องทำงานกลุ่ม คุณชอบบทบาทแบบไหน?",
+                        options: [
+                            { text: "ทำหน้าที่ที่ต้องใช้ความอดทนและความใหญ่โต เช่น ขนของหรือจัดการทรัพยากร", score: 1, fish: 0 },
+                            { text: "เป็นที่ปรึกษาที่ใจเย็นคอยดูแลให้ทุกคนสงบ", score: 2, fish: 1 },
+                            { text: "ทำงานเบื้องหลังมักจะจัดการงานที่ต้องใช้ความชำนาญตอนกลางคืน", score: 3, fish: 2 },
+                            { text: "เป็นคนเก็บรายละเอียดคอยระวังไม่ให้เกิดความผิดพลาด", score: 4, fish: 3 },
+                            { text: "เป็นผู้เชี่ยวชาญเฉพาะด้านที่คนอื่นมักต้องมาขอคำแนะนำ", score: 5, fish: 4 }
+                        ]
+                    },
+                ];
+
+                const fishes = [{
+                        name: " ปลาบึก (Mekong Giant Catfish)  ",
+                        image: "assets/fish/8.png",
+                        description: "คุณคือยักษ์ใหญ่ผู้ใจดี! คุณเป็นคนสุภาพ อ่อนโยน มีขนาดร่างกายหรือความคิดที่ใหญ่โต ชอบอยู่ในสภาพแวดล้อมที่ท้าทาย และเป็นมังสวิรัติทางจิตใจ (ไม่ชอบการทำร้ายใคร)"
+                    },
+                    {
+                        name: "ปลาคูน (Giant Barb / ปลากะโห้)",
+                        image: "assets/fish/3.png",
+                        description: "คุณคือผู้ทรงภูมิแห่งน้ำลึก! คุณเป็นคนสงบ หนักแน่น สุขุม และไม่ดุร้าย คุณชอบความเรียบง่ายและธรรมชาติ มักจะอยู่เป็นคู่หรือกลุ่มเล็ก ๆ และมีความสุขกับการใช้ชีวิตอย่างช้า ๆ"
+                    },
+                    {
+                        name: "ปลาเอิน (Spotted Featherback)",
+                        image: "assets/fish/7.png",
+                        description: "คุณคือพรานเงาผู้มีเสน่ห์! คุณเป็นคนมีเสน่ห์ดึงดูด มีลายจุด (บุคลิก) ที่เป็นเอกลักษณ์ แต่ค่อนข้างดุและคล่องแคล่ว คุณชอบทำงานหรือทำกิจกรรมในยามค่ำคืน และเก่งในการซ่อนตัว"
+                    },
+                    {
+                        name: "กระเบนราหูน้ำจืด (Giant Freshwater Stingray)",
+                        image: "assets/fish/9.png",
+                        description: "คุณคือนักซุ่มผู้สงบ! คุณเป็นคนเรียบง่าย ไม่ชอบแสดงตัว ชอบฝังตัวอยู่กับพื้นดินหรือพื้นทราย (อยู่กับความเป็นจริง) แม้จะดูสงบ แต่หากถูกรบกวน คุณมีกลไกการป้องกันตัวเองที่เด็ดขาดและเฉียบคม"
+                    },
+                    {
+                        name: "ปลาหว่าหน้านอ (Incisilabeo behri)",
+                        image: "assets/fish/10.png",
+                        description: "คุณคือผู้เชี่ยวชาญที่มีเอกลักษณ์! คุณเป็นคนที่มีบุคลิกโดดเด่นหรือมีความรู้เฉพาะตัวที่น่าสนใจ (เหมือน \"นอ\" ที่หน้าผาก) คุณเป็นที่ต้องการตัวในฐานะผู้เชี่ยวชาญ และแม้ว่าอาจจะพบได้ยากในกลุ่มสังคม แต่ก็มีคุณค่าและเป็นที่ยอมรับ"
+                    }
+                ];
+
+                let currentQuestion = 0;
+                let score = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
+                let selectedFish = 0;
+
+                function showQuiz() {
+                    document.getElementById('quizModal').classList.add('active');
+                }
+
+                function closeQuiz() {
+                    document.getElementById('quizModal').classList.remove('active');
+                }
+
+                function startQuiz() {
+                    currentQuestion = 0;
+                    score = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
+                    document.getElementById('introScreen').classList.remove('active');
+                    document.getElementById('questionScreen').classList.add('active');
+                    loadQuestion();
+                }
+
+                function loadQuestion() {
+                    const question = quizData[currentQuestion];
+                    const progress = ((currentQuestion + 1) / quizData.length) * 100;
+
+                    document.getElementById('progressFill').style.width = progress + '%';
+                    document.getElementById('questionNumber').textContent = `คำถามที่ ${currentQuestion + 1} / ${quizData.length}`;
+                    document.getElementById('questionText').textContent = question.question;
+
+                    const optionsHTML = question.options.map((option, index) =>
+                        `<button class="option-btn" onclick="selectOption(${index})">${option.text}</button>`
+                    ).join('');
+
+                    document.getElementById('optionsContainer').innerHTML = optionsHTML;
+                }
+
+                function selectOption(index) {
+                    const question = quizData[currentQuestion];
+                    const option = question.options[index];
+
+                    score[option.fish]++;
+
+                    currentQuestion++;
+
+                    if (currentQuestion < quizData.length) {
+                        loadQuestion();
+                    } else {
+                        showResult();
+                    }
+                }
+
+                function showResult() {
+                    const maxScore = Math.max(score[0], score[1], score[2], score[3], score[4]);
+                    selectedFish = Object.keys(score).find(key => score[key] === maxScore);
+
+                    document.getElementById('questionScreen').classList.remove('active');
+                    document.getElementById('resultScreen').classList.add('active');
+
+                    const fish = fishes[selectedFish];
+                    document.getElementById('fishEmoji').innerHTML = `<img src="${fish.image}" class="fish-img">`;
+                    document.getElementById('fishName').textContent = fish.name;
+                    document.getElementById('scoreDisplay').textContent = `คะแนน: ${score[selectedFish]} คะแนน`;
+                    document.getElementById('fishDescription').textContent = fish.description;
+                }
+
+                function restartQuiz() {
+                    document.getElementById('resultScreen').classList.remove('active');
+                    document.getElementById('introScreen').classList.add('active');
+                }
+
+                document.getElementById('openPopup').addEventListener('click', showQuiz);
+
+                // =======================
+                // Story Slider Logic (Sec-18)
+                // =======================
+                let storyIndex = 0;
+
+                function currentStorySlide(n) {
+                    showStorySlides(storyIndex = n);
+                }
+
+                function plusStorySlides(n) {
+                    showStorySlides(storyIndex += n);
+                }
+
+                function showStorySlides(n) {
+                    const track = document.getElementById('storyTrack');
+                    const dots = document.querySelectorAll('.dot-story');
+                    const slides = track.querySelectorAll('.slide-item'); // หา slide เฉพาะใน track นี้
+
+                    if (n >= slides.length) { storyIndex = 0; }
+                    if (n < 0) { storyIndex = slides.length - 1; }
+
+                    if (track) {
+                        track.style.transform = `translateX(-${storyIndex * 100}%)`;
+                    }
+
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    if (dots[storyIndex]) {
+                        dots[storyIndex].classList.add('active');
+                    }
+                }

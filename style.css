@@ -2534,84 +2534,961 @@ img[alt="img-right"].show {
 /* Violet */
 
 .sec-14 {
-    background-color: #a855f7;
+    background-color: #FBDC8F;
+}
+
+.fishing-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.image-fishing img {
+    position: relative;
+    top: 210px;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.text-fishing {
+    color: #09324E;
+    position: absolute;
+    font-size: 58.5px;
+    font-weight: bold;
+    text-align: center;
+    top: 10%;
+    left: 17%;
+}
+
+.e-1 {
+    position: absolute;
+    width: 27%;
+    height: 80%;
+    left: 7%;
+    top: 15%;
+    z-index: 1;
+}
+
+.e-3 {
+    position: absolute;
+    width: 27%;
+    height: 80%;
+    left: 45%;
+    top: 30%;
+    z-index: 1;
+}
+
+.e-2 {
+    position: absolute;
+    width: 27%;
+    height: 80%;
+    left: 70%;
+    top: -5%;
+    z-index: 1;
+}
+
+.text-fishing span {
+    color: #E95A0C;
+    font-size: 70px;
+}
+
+@media (max-width: 768px) {
+    .fishing-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 100vh;
+    }
+    .image-fishing {
+        text-align: center;
+        margin-top: auto;
+    }
+    .image-fishing img {
+        height: 500px;
+        width: 100%;
+        top: 70px;
+        opacity: 0.5;
+    }
+    .text-fishing span {
+        font-size: 56px;
+    }
+    .text-fishing {
+        font-size: 35px;
+        text-align: center;
+        top: 10%;
+        left: 20%;
+    }
+    .e-1 {
+        width: 33%;
+        height: 46%;
+        left: -1%;
+        top: 20%;
+    }
+    .e-3 {
+        width: 33%;
+        height: 46%;
+        left: 35%;
+        top: 25%;
+    }
+    .e-2 {
+        width: 33%;
+        height: 46%;
+        left: 68%;
+        top: 25%;
+    }
 }
 
 
 /* Purple */
 
 .sec-15 {
-    background-color: #d946ef;
+    background-color: #FBDC8F;
+}
+
+fishing-container1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.image-fishing1 img {
+    position: relative;
+    top: 210px;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.text-fishing1 {
+    color: #09324E;
+    position: absolute;
+    font-size: 68.5px;
+    font-weight: bold;
+    text-align: center;
+    top: 10%;
+    left: 23%;
+}
+
+.text-fishing1 span {
+    color: #E95A0C;
+}
+
+.e-4 {
+    position: absolute;
+    width: 26%;
+    height: 75%;
+    left: 7%;
+    top: 30%;
+    z-index: 1;
+}
+
+.e-5 {
+    transform: rotate(30deg);
+    position: absolute;
+    width: 26%;
+    height: 75%;
+    left: 45%;
+    top: 35%;
+    z-index: 1;
+}
+
+.e-6 {
+    position: absolute;
+    width: 26%;
+    height: 75%;
+    left: 70%;
+    top: -5%;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .fishing-container1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 100vh;
+    }
+    .image-fishing1 {
+        text-align: center;
+        margin-top: auto;
+    }
+    .image-fishing1 img {
+        height: 500px;
+        width: 100%;
+        top: 70px;
+        opacity: 0.5;
+    }
+    .text-fishing1 span {
+        font-size: 56px;
+        top: -20px;
+    }
+    .text-fishing1 {
+        font-size: 35px;
+        text-align: center;
+        top: 10%;
+        left: 32%;
+    }
+    .e-4 {
+        width: 33%;
+        height: 46%;
+        left: 0%;
+        top: 25%;
+    }
+    .e-5 {
+        transform: rotate(55deg);
+        width: 33%;
+        height: 46%;
+        left: 38.3%;
+        top: 25%;
+    }
+    .e-6 {
+        width: 33%;
+        height: 46%;
+        left: 70%;
+        top: 25%;
+    }
 }
 
 
 /* Fuchsia */
 
+
+/* =======================
+   Section 16 Styles (Quiz Game)
+======================= */
+
 .sec-16 {
-    background-color: #ec4899;
+    position: relative;
+    /* เป็นจุดอ้างอิงให้รูปพื้นหลัง */
+    background-color: #FBDC8F;
+    overflow: hidden;
+    /* จัดกึ่งกลางทั้งแนวตั้งและแนวนอน */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* สูงเต็มจอ */
+    padding: 40px 20px;
+    text-align: center;
+}
+
+
+/* รูปพื้นหลัง (อยู่ชั้นล่างสุด) */
+
+.sec16bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    /* อยู่หลังสุด */
+    opacity: 0.6;
+    /* จางลงนิดนึงให้ตัวหนังสือเด่น */
+    transform: scale(1.5);
+}
+
+
+/* กล่องเนื้อหา (อยู่ชั้นบน) */
+
+.sec16-container {
+    position: relative;
+    z-index: 2;
+    /* ต้องมากกว่า 0 เพื่อให้ลอยเหนือพื้นหลัง */
+    width: 100%;
+    max-width: 1000px;
+}
+
+
+/* หัวข้อ */
+
+.sec16-question {
+    color: #09324E;
+    /* สีน้ำเงินเข้ม */
+    font-size: clamp(24px, 5vw, 48px);
+    /* Responsive Font */
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 20%;
+}
+
+.doubleCode {
+    color: #E95A0C;
+    /* สีส้ม */
+}
+
+
+/* =======================
+   Game Button (Image Only)
+======================= */
+
+.game-btn {
+    /* ล้างค่าปุ่มเดิมทิ้ง */
+    background: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    /* จัดตำแหน่ง */
+    display: block;
+    /* เปลี่ยนเป็น block เพื่อให้จัดกึ่งกลางได้ */
+    margin: 40px auto 0;
+    /* บน 40px, ซ้ายขวา auto (กึ่งกลาง), ล่าง 0 */
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+/* ปรับขนาดรูปภาพปุ่ม */
+
+.game-btn img {
+    display: block;
+    width: 280px;
+    /* ขนาดปกติในจอคอม */
+    max-width: 80vw;
+    height: auto;
+    /* เพิ่มเงาให้ตัวปุ่มดูลอยออกมา */
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    border-radius: 10%;
+    transform: scale(2);
+}
+
+
+/* --- Effect ตอนชี้และกด --- */
+
+.game-btn:hover {
+    transform: scale(1.1);
+    /* ขยายและหมุนนิดๆ */
+}
+
+.game-btn:active {
+    transform: scale(0.95);
+    /* กดแล้วยุบ */
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.2));
+    /* เงาหดลง */
+}
+
+
+/* =======================
+   Quiz Modal Styles (Fixed)
+======================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* เพิ่ม Z-index ให้สูงกว่าทุกอย่างแน่นอน */
+    background: rgba(0, 0, 0, 0.5);
+    /* เพิ่มพื้นหลังมืดๆ */
+    backdrop-filter: blur(5px);
+    /* เบลอฉากหลัง */
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-container {
+    /* พื้นหลัง */
+    background-image: url("assets/other/light.png"), linear-gradient(to top, #09324E 0%, #185F8E 50%, #ffffff 100%);
+    background-size: contain, cover;
+    background-repeat: no-repeat, no-repeat;
+    border-radius: 20px;
+    padding: 40px;
+    width: 90%;
+    max-width: 900px;
+    height: auto;
+    max-height: 90vh;
+    /* ไม่ให้เกินจอ */
+    overflow-y: auto;
+    /* เลื่อนได้ถ้าเนื้อหาเยอะ */
+    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* ปุ่มปิด */
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #f47421;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: #d45a0a;
+    transform: rotate(90deg);
+}
+
+
+/* --- เนื้อหาภายใน Quiz --- */
+
+.quiz-content {
+    display: none;
+    width: 100%;
+}
+
+.quiz-content.active {
+    display: block;
+}
+
+
+/* --- Intro Screen --- */
+
+.intro-screen {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    /* กำหนดความสูงขั้นต่ำแทนการใช้ top */
+}
+
+.intro-screen h1 {
+    color: #09324E;
+    font-size: clamp(24px, 4vw, 3em);
+    /* Responsive Font */
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ⭐ แก้ไขจุดที่กระทบเว็บหลัก: ระบุเจาะจงเฉพาะ p ใน intro-screen ⭐ */
+
+.intro-screen p {
+    font-size: 1.2em;
+    color: #e0f2fe;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.intro-screen .start-btn {
+    background: orangered;
+    color: white;
+    border: none;
+    padding: 15px 60px;
+    font-size: 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(233, 90, 12, 0.4);
+    margin-top: 20px;
+}
+
+.intro-screen .start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(233, 90, 12, 0.6);
+}
+
+
+/* --- Question Screen --- */
+
+.question-screen {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.progress-bar {
+    background: #e0e0e0;
+    height: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #ff8a50 0%, #e95a0c 100%);
+    /* เปลี่ยนเป็นสีส้มธีม */
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.question-number {
+    color: #f47421;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.question-screen h2 {
+    color: #333;
+    font-size: clamp(20px, 3vw, 1.8em);
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option-btn {
+    background: white;
+    border: 2px solid #eee;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'MyFont', sans-serif;
+    /* ใช้ฟอนต์หลัก */
+    color: #444;
+    text-align: left;
+}
+
+.option-btn:hover {
+    background: #FFF3E0;
+    /* สีส้มอ่อนๆ */
+    border-color: #ffccbc;
+    transform: translateX(5px);
+}
+
+
+/* --- Result Screen --- */
+
+.result-screen {
+    text-align: center;
+    padding: 20px 0;
+    animation: popIn 0.6s ease;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.result-screen h2 {
+    color: #ffffff;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.result-screen .you-are {
+    color: #00415f;
+    /* ฟ้าอ่อน */
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+
+/* จัดการรูปปลาให้สวยงาม */
+
+.fish-img {
+    width: 100%;
+    max-width: 250px;
+    /* จำกัดขนาดไม่ให้ใหญ่เกิน */
+    height: auto;
+    margin: 20px auto;
+    /* จัดกึ่งกลาง */
+    display: block;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s;
+}
+
+.fish-img:hover {
+    transform: scale(1.05) rotate(-2deg);
+}
+
+.fish-description {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 15px;
+    margin: 20px 0;
+    text-align: left;
+    line-height: 1.6;
+    font-size: 16px;
+    /* ลดขนาดลงหน่อยให้อ่านง่าย */
+    color: #333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.score-display {
+    background: rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.restart-btn {
+    background: #f47421;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.restart-btn:hover {
+    background: #e65100;
+    transform: translateY(-2px);
+}
+
+
+/* Helper Class */
+
+.kong-color {
+    color: orangered;
+}
+
+
+/* =======================
+   Mobile Responsive (แก้บั๊กปุ่มเล็ก)
+======================= */
+
+@media (max-width: 768px) {
+    .sec16-question {
+        font-size: 28px;
+        /* ปรับขนาดตัวหนังสือในมือถือ */
+    }
+    .game-btn {
+        margin-top: 30px;
+    }
+    /* ⭐ จุดสำคัญที่แก้ ⭐ */
+    .game-btn img {
+        width: 180px;
+        /* แก้จาก 40px (เล็กเกิน) เป็น 180px ให้นิ้วจิ้มโดน */
+    }
 }
 
 
 /* Pink */
 
 .sec-17 {
-    background-color: #f43f5e;
+    background-color: #FBDC8F;
+}
+
+
+/* จัดการรูปพื้นหลัง */
+
+.sec17-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* สำคัญ: ขยายรูปให้เต็มพื้นที่โดยไม่เสียสัดส่วน */
+    z-index: 0;
+    /* อยู่ชั้นล่างสุด */
+    opacity: 0.8;
+}
+
+
+/* จัดการกล่องข้อความ */
+
+.sec17-container {
+    position: relative;
+    z-index: 2;
+    /* ลอยอยู่เหนือรูปภาพ */
+    text-align: center;
+    width: 90%;
+    max-width: 1200px;
+}
+
+
+/* จัดการตัวหนังสือ */
+
+.sec17-title {
+    font-size: clamp(48px, 8vw, 120px);
+    /* Responsive: เล็กสุด 48px, ใหญ่สุด 120px */
+    font-weight: 900;
+    /* หนาพิเศษ */
+    color: #09324E;
+    /* สีน้ำเงินเข้ม (หรือเปลี่ยนเป็น white ถ้าพื้นหลังมืด) */
+    line-height: 1.2;
+    margin: 0;
+    /* เพิ่มขอบขาวหรือเงา เพื่อให้อ่านออกชัดเจนบนรูปพื้นหลัง */
+}
+
+
+/* สีส้มสำหรับคำว่า "ลูกแม่น้ำโขง" และ "”" */
+
+.sec17-title .doubleCode {
+    color: orangered;
+}
+
+
+/* Responsive สำหรับมือถือ */
+
+@media (max-width: 768px) {
+    .sec17-title {
+        /* ปรับขนาดฟอนต์ในมือถือให้พอดี */
+        line-height: 1.4;
+    }
 }
 
 
 /* Rose */
 
 .sec-18 {
-    background-color: #64748b;
+    background-color: #FBDC8F;
 }
 
 
-/* Slate */
+/* =======================
+   Sec-18 Story Styles
+======================= */
+
+
+/* จุด Dot สำหรับ Story Slider */
+
+.dot-story {
+    width: 15px;
+    height: 15px;
+    background-color: #FFCCBC;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot-story.active,
+.dot-story:hover {
+    background-color: #09324E;
+    /* เปลี่ยนเป็นสีน้ำเงินเข้มให้ต่างจาก Sec 7 */
+    transform: scale(1.2);
+}
+
+
+/* =======================
+   Section 18 Layout Adjustments (Wider Box)
+======================= */
+
+
+/* 1. ขยายกล่องให้กว้างขึ้นเฉพาะ Section 18 */
+
+.sec-18 .card-wrapper,
+.sec-18 .box-white {
+    max-width: 1300px !important;
+    /* ขยายจาก 1000px เป็น 1300px */
+    width: 100%;
+    /* ให้เกือบเต็มจอในจอเล็ก */
+}
+
+.sec-18 .box-orange {
+    left: -2%;
+    width: 100%;
+}
+
+
+/* 2. ปรับ Layout ข้างในให้ยืดหยุ่น */
+
+.sec-18 .slide-content {
+    display: flex;
+    align-items: flex-start !important;
+    /* ดันทุกอย่างขึ้นบน */
+    gap: 60px;
+    /* เพิ่มระยะห่างระหว่างรูปกับข้อความ */
+    padding: 30px 20px;
+    text-align: left;
+}
+
+
+/* 3. ปรับขนาดรูปภาพ */
+
+.sec-18 .slide-img {
+    flex: 0 0 350px;
+    /* ล็อกความกว้างรูปไว้ที่ 350px */
+    max-width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+.sec-18 .slide-img img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 10px solid white;
+    /* ขอบหนาขึ้น */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+
+/* 4. ปรับข้อความให้อ่านง่าย */
+
+.sec-18 .slide-text {
+    flex: 1;
+    /* กินพื้นที่ที่เหลือ */
+}
+
+.sec-18 .slide-text h3 {
+    font-size: clamp(24px, 3vw, 36px);
+    /* หัวข้อใหญ่สะใจ */
+    margin-top: 0;
+    line-height: 1.3;
+    margin-bottom: 20px;
+}
+
+.sec-18 .slide-text p {
+    font-size: clamp(16px, 1.2vw, 18px);
+    /* ตัวหนังสืออ่านง่าย */
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+
+/* Responsive มือถือ */
+
+@media (max-width: 1024px) {
+    .sec-18 .slide-content {
+        flex-direction: column;
+        /* เรียงลงแนวตั้งใน Tablet/Mobile */
+        align-items: center !important;
+        text-align: center;
+        gap: 30px;
+    }
+    .sec-18 .slide-img {
+        flex: auto;
+        width: 250px;
+        max-width: 80%;
+    }
+    .sec-18 .slide-text p[style*="background"] {
+        text-align: left;
+        /* กล่องคำพูดชิดซ้ายเสมอเพื่อให้อ่านง่าย */
+    }
+}
 
 .sec-19 {
-    background-color: #71717a;
+    background-color: #757575;
+    /* สีเทาเข้มตามรูป */
+    color: #ffffff;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* จัดกึ่งกลางแนวตั้ง */
+    align-items: center;
+    /* จัดกึ่งกลางแนวนอน */
+    min-height: 100vh;
+    /* สูงเต็มจอ */
+    text-align: left;
+    /* ตัวหนังสือชิดซ้าย */
 }
 
 
-/* Zinc */
+/* กล่องเนื้อหา */
 
-.sec-20 {
-    background-color: #737373;
+.ref-container {
+    position: relative;
+    left: -20%;
+    width: 90%;
+    max-width: 1000px;
 }
 
 
-/* Neutral */
+/* หัวข้อ */
 
-.sec-21 {
-    background-color: #78716c;
+.ref-title {
+    font-size: clamp(24px, 4vw, 36px);
+    /* ขนาด responsive */
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #ffffff;
+    border-bottom: 1px solid #999;
+    /* (Optional) เส้นขีดใต้บางๆ */
+    padding-bottom: 10px;
+    display: inline-block;
 }
 
 
-/* Stone */
+/* รายการลิงก์ */
 
-.sec-22 {
-    background-color: #450a0a;
+.ref-content p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    /* สำคัญ: ตัดบรรทัดถ้าลิงก์ยาวเกินจอ */
+    color: #e0e0e0;
+    /* สีเทาอ่อนๆ */
 }
 
 
-/* Dark Red */
+/* ตัวลิงก์ */
 
-.sec-23 {
-    background-color: #172554;
+.ref-content a {
+    color: #ffffff;
+    text-decoration: underline;
+    /* ขีดเส้นใต้เหมือนรูป */
+    transition: color 0.2s;
+}
+
+.ref-content a:hover {
+    color: #FBDC8F;
+    /* สีเหลืองอ่อนของธีมเมื่อเอาเมาส์ชี้ */
 }
 
 
-/* Dark Blue */
+/* Responsive มือถือ */
 
-.sec-24 {
-    background-color: #000000;
+@media (max-width: 768px) {
+    .sec-19 {
+        align-items: flex-start;
+        /* ในมือถือให้ชิดซ้าย */
+        justify-content: flex-start;
+        height: auto;
+        /* ปล่อยความสูงอิสระ */
+    }
+    .ref-content p {
+        font-size: 12px;
+        /* ลดขนาดตัวหนังสือลงหน่อย */
+    }
 }
-
-
-/* Black */
-
-
-/* Black */
 
 
 /* =========================================
@@ -2878,7 +3755,9 @@ img[alt="img-right"].show {
     .pin-btn3 .info-card,
     .pin-btn4 .info-card,
     .pin-btn5 .info-card,
-    .pin-btn6 .info-card {
+    .pin-btn6 .info-card,
+    .pin-btn7 .info-card,
+    .pin-btn8 .info-card {
         /* ถ้าปุ่ม 2 (เลย) อยากให้ออกซ้ายด้วย ก็ใส่เพิ่มตรงนี้ */
         /* ล้างค่าเดิม (ที่เด้งขึ้นบน) ทิ้ง */
         bottom: auto;
@@ -2898,7 +3777,9 @@ img[alt="img-right"].show {
     .pin-btn3 .info-card::after,
     .pin-btn4 .info-card::after,
     .pin-btn5 .info-card::after,
-    .pin-btn6 .info-card::after {
+    .pin-btn6 .info-card::after,
+    .pin-btn7 .info-card::after,
+    .pin-btn8 .info-card::after {
         /* ล้างค่าเดิม */
         bottom: auto;
         left: auto;
@@ -2921,7 +3802,9 @@ img[alt="img-right"].show {
     .pin-btn3:hover .info-card,
     .pin-btn4:hover .info-card,
     .pin-btn5:hover .info-card,
-    .pin-btn6:hover .info-card {
+    .pin-btn6:hover .info-card,
+    .pin-btn7:hover .info-card,
+    .pin-btn8:hover .info-card {
         transform: translateY(-50%) translateX(-10px);
     }
 }
