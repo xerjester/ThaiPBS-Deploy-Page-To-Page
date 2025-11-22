@@ -439,21 +439,17 @@ header::before {
     background-color: white;
     padding: 1.5rem;
     border-radius: 0.75rem;
-    /* rounded-xl */
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     border-left: 4px solid orangered;
-    /* เส้นขอบซ้ายสีส้ม */
     transition: transform 0.3s;
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
-    /* ขยับขึ้นนิดหน่อยตอนชี้ */
 }
 
 .stat-number {
     font-size: 2rem;
-    /* ลดขนาดลงนิดหน่อยจาก 4xl เพื่อความปลอดภัยในจอมือถือ */
     font-weight: 900;
     color: orangered;
     margin-bottom: 0.5rem;
@@ -461,471 +457,276 @@ header::before {
 
 .stat-label {
     color: #4b5563;
-    /* gray-600 */
     font-weight: 600;
     font-size: 0.9rem;
     line-height: 1.4;
 }
 
-
-/* --- RESPONSIVE: ตั้งค่าสำหรับหน้าจอใหญ่ (Tablet แนวนอน & PC) --- */
-
 @media (min-width: 768px) {
     .about-content {
         grid-template-columns: 1fr 1fr;
-        /* เปลี่ยนเป็น 2 คอลัมน์ซ้ายขวา */
     }
     .image-wrapper {
         height: 596px;
-        /* ความสูงเต็มตามต้นฉบับเมื่อจอใหญ่พอ */
     }
     .stat-number {
         font-size: 2.25rem;
-        /* ขยายตัวเลขกลับเป็นขนาดใหญ่ */
     }
 }
-
-
-/* --- RESPONSIVE: ตั้งค่าสำหรับมือถือเล็กๆ --- */
 
 @media (max-width: 480px) {
     .section-title {
         font-size: 2rem;
-        /* ลดขนาดหัวข้อหลัก */
     }
     .stat-grid {
         grid-template-columns: 1fr;
-        /* เรียงการ์ดสถิติลงมาเป็นแถวเดียวถ้าจอเล็กมาก */
     }
 }
-
-
-/* Red */
 
 .sec-2 {
     background-color: #FBDC8F;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    min-height: 100vh;
 }
 
 .sec-2 h1 {
     color: #886250;
-    position: relative;
-    top: -40%;
-    left: 50%;
-    /* เพิ่ม 2 บรรทัดนี้ครับ */
-    transform: translateX(-50%);
-    /* ดึงกลับมาให้กึ่งกลางเป๊ะๆ */
-    white-space: nowrap;
-    /* บังคับให้อยู่บรรทัดเดียว ห้ามตัดลงมา */
-    margin: 0;
-    /* ลบระยะขอบเดิมเผื่อไว้ */
-    font-size: 32px;
-}
-
-.double-coade {
-    color: orangered;
-}
-
-.Map-of-Mekong-River {
-    pointer-events: none;
+    font-size: clamp(24px, 4vw, 36px);
+    text-align: center;
+    margin: 0 0 100px 0;
+    position: static;
+    transform: none;
+    top: auto;
+    left: auto;
+    white-space: normal;
+    line-height: 1.5;
 }
 
 .image-container {
-    max-width: 100vw;
-    max-height: 1920px;
+    width: 30%;
+    max-width: auto;
+    /* จำกัดความกว้างไม่ให้ใหญ่เกิน */
     position: relative;
     display: flex;
     justify-content: center;
-    top: 75px;
-    left: -20%;
+    /* Reset ค่าเดิมทิ้ง เพื่อให้มันต่อท้ายข้อความแบบธรรมชาติ */
+    top: auto;
+    left: auto;
+    /* Animation Values */
     opacity: 0;
-    transform: scale(0);
-    /* เริ่มเล็กลงเล็กน้อย */
+    transform: scale(0.5);
+    /* เริ่มต้นเล็กหน่อย */
     transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
+
+/* State ตอนแสดงผล */
+
 .image-container.show {
     opacity: 1;
-    transform: scale(1.7);
-    /* ค่อย ๆ ขยายกลับมาขนาดจริง */
+    transform: scale(1);
+    /* ขยายกลับมาขนาดปกติ (100%) */
 }
 
 
-/* ⭐ หัวใจสำคัญ: wrapper จะหดตัวเท่าขนาดรูปภาพ ⭐ */
+/* =======================
+   ซ่อน Scrollbar แต่ยังเลื่อนได้
+======================= */
+
+
+/* สำหรับ Chrome, Safari, Opera */
+
+.image-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* สำหรับ IE, Edge และ Firefox */
+
+.image-container {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+
+/* Wrapper ของรูปภาพ */
 
 .map-wrapper {
     position: relative;
-    /* เป็นจุดอ้างอิงให้ปุ่ม */
-    display: inline-block;
-    /* หดตัวรัดรูปภาพ */
-    width: auto;
-    line-height: 0;
-    /* ลบช่องว่างใต้รูป */
+    width: 100%;
+    /* ให้เต็มพื้นที่ Container */
+    max-width: 1000px;
+    /* จำกัดขนาดรูปจริง */
 }
-
-
-/* สั่งให้รูปภาพปรับขนาดตาม wrapper (ซึ่ง wrapper ก็ปรับตามรูป) */
 
 .map-wrapper img {
     display: block;
-    width: auto;
-    /* หรือ 100% */
-    max-width: 100%;
-    /* ห้ามเกินจอ */
+    width: 100%;
     height: auto;
+    object-fit: contain;
+}
+
+[class^="pin-btn"] {
+    position: absolute;
+    width: clamp(1px, 3.5%, 50px);
+    aspect-ratio: 1 / 1;
+    height: auto;
+    transform: translate(-50%, -50%) scale(0);
+    /* เริ่มต้นซ่อนด้วยขนาด 0 */
+    opacity: 0;
+    /* ดีไซน์ */
+    background: radial-gradient(circle, #ff4500, #c50000);
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: clamp(10px, 1.2vw, 18px);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+}
+
+[class^="pin-btn"].show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .pin-btn1.show {
-    opacity: 1;
-    transform: scale(0.5);
-    transition: opacity 1.5s ease, transform 1s ease;
     transition-delay: 1.6s;
 }
 
 .pin-btn2.show {
-    opacity: 1;
-    transform: scale(0.5);
-    transition: opacity 1.5s ease, transform 1s ease;
     transition-delay: 1.8s;
 }
 
 .pin-btn3.show {
-    opacity: 1;
-    transform: scale(0.5);
-    transition: opacity 1.5s ease, transform 1s ease;
-    transition-delay: 2s;
+    transition-delay: 2.0s;
 }
 
 .pin-btn4.show {
-    opacity: 1;
-    transform: scale(0.5);
-    transition: opacity 1.5s ease, transform 1s ease;
     transition-delay: 2.2s;
 }
 
 .pin-btn5.show {
-    opacity: 1;
-    transform: scale(0.5);
-    transition: opacity 1.5s ease, transform 1s ease;
     transition-delay: 2.4s;
 }
 
 .pin-btn6.show {
-    opacity: 1;
-    transform: scale(0.5);
-    transition: opacity 1.5s ease, transform 1s ease;
     transition-delay: 2.6s;
 }
 
 .pin-btn7.show {
-    opacity: 1;
-    transform: scale(0.5);
-    transition: opacity 1.5s ease, transform 1s ease;
     transition-delay: 2.8s;
 }
 
 .pin-btn8.show {
-    opacity: 1;
-    transform: scale(0.5);
-    transition: opacity 1.5s ease, transform 1s ease;
-    transition-delay: 3s;
+    transition-delay: 3.0s;
 }
 
-
-/* ปุ่มหมุดปรับสวยขึ้น */
-
-.pin-btn1 {
-    opacity: 0;
-    position: absolute;
-    background: linear-gradient(145deg, #c50000);
-    /* ไล่สีส้มแดง */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    /* ทำให้กลม */
-    padding: 12px;
-    /* ขนาดปุ่ม */
-    font-size: 20px;
-    /* ไอคอนใหญ่ขึ้น */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: scale(3.5);
-    z-index: 8;
-}
-
-
-/* Hover effect */
-
-.pin-btn1:hover {
-    /* ขยาย + หมุนเล็กน้อย */
+[class^="pin-btn"]:hover,
+[class^="pin-btn"]:focus {
+    /* ขยาย 1.2 เท่า */
+    background: radial-gradient(circle, #ff6f00, #e65100);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.8);
-    background: linear-gradient(145deg, #721100);
-}
-
-.pin-btn2 {
-    opacity: 0;
-    position: absolute;
-    background: linear-gradient(145deg, #c50000);
-    /* ไล่สีส้มแดง */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    /* ทำให้กลม */
-    padding: 12px;
-    /* ขนาดปุ่ม */
-    font-size: 20px;
-    /* ไอคอนใหญ่ขึ้น */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: scale(3.5);
-    z-index: 7;
-}
-
-
-/* Hover effect */
-
-.pin-btn2:hover {
-    /* ขยาย + หมุนเล็กน้อย */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.8);
-    background: linear-gradient(145deg, #721100);
-}
-
-.pin-btn3 {
-    opacity: 0;
-    position: absolute;
-    background: linear-gradient(145deg, #c50000);
-    /* ไล่สีส้มแดง */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    /* ทำให้กลม */
-    padding: 12px;
-    /* ขนาดปุ่ม */
-    font-size: 20px;
-    /* ไอคอนใหญ่ขึ้น */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: scale(3.5);
-    z-index: 6;
-}
-
-
-/* Hover effect */
-
-.pin-btn3:hover {
-    /* ขยาย + หมุนเล็กน้อย */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.8);
-    background: linear-gradient(145deg, #721100);
-}
-
-.pin-btn4 {
-    opacity: 0;
-    position: absolute;
-    background: linear-gradient(145deg, #c50000);
-    /* ไล่สีส้มแดง */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    /* ทำให้กลม */
-    padding: 12px;
-    /* ขนาดปุ่ม */
-    font-size: 20px;
-    /* ไอคอนใหญ่ขึ้น */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: scale(3.5);
-    z-index: 5;
-}
-
-
-/* Hover effect */
-
-.pin-btn4:hover {
-    /* ขยาย + หมุนเล็กน้อย */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.8);
-    background: linear-gradient(145deg, #721100);
-}
-
-.pin-btn5 {
-    opacity: 0;
-    position: absolute;
-    background: linear-gradient(145deg, #c50000);
-    /* ไล่สีส้มแดง */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    /* ทำให้กลม */
-    padding: 12px;
-    /* ขนาดปุ่ม */
-    font-size: 20px;
-    /* ไอคอนใหญ่ขึ้น */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: scale(3.5);
-    z-index: 4;
-}
-
-
-/* Hover effect */
-
-.pin-btn5:hover {
-    /* ขยาย + หมุนเล็กน้อย */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.8);
-    background: linear-gradient(145deg, #721100);
-}
-
-.pin-btn6 {
-    opacity: 0;
-    position: absolute;
-    background: linear-gradient(145deg, #c50000);
-    /* ไล่สีส้มแดง */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    /* ทำให้กลม */
-    padding: 12px;
-    /* ขนาดปุ่ม */
-    font-size: 20px;
-    /* ไอคอนใหญ่ขึ้น */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: scale(3.5);
-    z-index: 3;
-}
-
-
-/* Hover effect */
-
-.pin-btn6:hover {
-    /* ขยาย + หมุนเล็กน้อย */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.8);
-    background: linear-gradient(145deg, #721100);
-}
-
-.pin-btn7 {
-    opacity: 0;
-    position: absolute;
-    background: linear-gradient(145deg, #c50000);
-    /* ไล่สีส้มแดง */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    /* ทำให้กลม */
-    padding: 12px;
-    /* ขนาดปุ่ม */
-    font-size: 20px;
-    /* ไอคอนใหญ่ขึ้น */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: scale(3.5);
-    z-index: 2;
-}
-
-
-/* Hover effect */
-
-.pin-btn7:hover {
-    /* ขยาย + หมุนเล็กน้อย */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.8);
-    background: linear-gradient(145deg, #721100);
-}
-
-.pin-btn8 {
-    opacity: 0;
-    position: absolute;
-    background: linear-gradient(145deg, #c50000);
-    /* ไล่สีส้มแดง */
-    color: white;
-    border: none;
-    border-radius: 50%;
-    /* ทำให้กลม */
-    padding: 12px;
-    /* ขนาดปุ่ม */
-    font-size: 20px;
-    /* ไอคอนใหญ่ขึ้น */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: scale(3.5);
-    z-index: 1;
-}
-
-.pin-btn8:hover {
-    /* ขยาย + หมุนเล็กน้อย */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 69, 0, 0.8);
-    background: linear-gradient(145deg, #721100);
+    z-index: 20;
+    /* ให้ลอยเหนือปุ่มอื่น */
+    border-color: #fff;
 }
 
 
 /* --- ดีไซน์กล่องข้อความ (Info Card) --- */
 
 .info-card {
+    /* --- Desktop (จอคอม) --- */
     position: absolute;
-    top: -90%;
-    /* ปรับตำแหน่งแกน Y */
-    left: 40px;
-    /* ปรับตำแหน่งแกน X (ให้ห่างจากปุ่มไปทางขวา) */
-    width: 700px;
-    /* ความกว้างของกล่องข้อความ */
+    /* จัดให้อยู่กึ่งกลางเหนือปุ่ม */
+    bottom: 140%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* ปรับความกว้างให้ยืดหยุ่น */
+    width: max-content;
+    /* กว้างเท่าข้อความ */
+    max-width: 300px;
+    /* แต่ห้ามเกิน 300px */
+    min-width: 250px;
+    /* และห้ามเล็กกว่า 250px */
     background-color: white;
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    /* เงาฟุ้งๆ */
     text-align: left;
-    font-size: 20px;
-    /* ขนาดตัวอักษรพื้นฐาน */
     color: #333;
     z-index: 100;
-    /* Animation การซ่อน/แสดง */
+    /* Animation */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
     transition: all 0.3s ease-in-out;
     pointer-events: none;
-    /* กันไม่ให้เมาส์ไปโดนตอนซ่อนอยู่ */
-    cursor: default;
-    /* เปลี่ยนเคอร์เซอร์เป็นปกติ */
 }
 
 
 /* --- แสดงกล่องเมื่อ Hover ที่ปุ่ม --- */
 
-.pin-btn1:hover .info-card,
-.pin-btn2:hover .info-card,
-.pin-btn3:hover .info-card,
-.pin-btn4:hover .info-card,
-.pin-btn5:hover .info-card,
-.pin-btn6:hover .info-card,
-.pin-btn7:hover .info-card,
-.pin-btn8:hover .info-card {
+
+/* --- แสดงกล่องเมื่อ Hover/Focus --- */
+
+[class^="pin-btn"]:hover .info-card,
+[class^="pin-btn"]:focus .info-card,
+[class^="pin-btn"]:focus-within .info-card {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
     pointer-events: auto;
+    /* ดันขึ้นเล็กน้อยตอนแสดงผล */
+    transform: translateX(-50%) translateY(-10px);
+}
+
+@media (max-width: 768px) {
+    .info-card {
+        position: fixed;
+        /* ⭐ แก้ตรงนี้: เปลี่ยนจาก 65% เป็น 50% เพื่อให้เริ่มที่กึ่งกลาง ⭐ */
+        top: 50% !important;
+        left: 50% !important;
+        bottom: auto !important;
+        /* คำสั่งนี้จะจัดกึ่งกลางทั้งแนวตั้งและแนวนอนให้เป๊ะ */
+        transform: translate(-50%, -50%) !important;
+        /* ขนาด */
+        width: 85vw !important;
+        max-width: 350px !important;
+        max-height: 60vh;
+        /* เพิ่มความสูงได้นิดหน่อยเพราะอยู่กลางจอแล้ว */
+        overflow-y: auto;
+        z-index: 9999;
+        margin: 0;
+        /* ดีไซน์ */
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        /* เงาเข้มขึ้นเพื่อให้ดูเหมือนลอยอยู่กลางจอ */
+        border: 2px solid orangered;
+    }
+    /* ส่วนอื่นๆ เหมือนเดิม */
+    .info-card::after {
+        display: none;
+    }
+    .card-title,
+    .card-subtitle {
+        font-size: 18px;
+    }
+    .info-card p,
+    .info-card li {
+        font-size: 14px;
+    }
 }
 
 
@@ -934,7 +735,7 @@ header::before {
 .card-title {
     color: #ff4500;
     /* สีส้มหัวข้อใหญ่ */
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 8px;
     margin-top: 0;
@@ -943,7 +744,7 @@ header::before {
 .card-subtitle {
     color: #ff4500;
     /* สีส้มหัวข้อย่อย */
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     margin-top: 12px;
     margin-bottom: 5px;
@@ -965,21 +766,16 @@ header::before {
     line-height: 1.4;
 }
 
-
-/* (Optional) สามเหลี่ยมชี้มาที่ปุ่ม */
-
-.info-card::before {
+.info-card::after {
     content: "";
     position: absolute;
-    top: 20px;
-    left: -10px;
-    /* ยื่นออกไปทางซ้าย */
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid white;
-    /* สามเหลี่ยมสีขาว */
+    bottom: -10px;
+    /* ยื่นลงมาข้างล่าง */
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
 }
 
 
@@ -1009,9 +805,6 @@ header::before {
 .pin-btn8:hover::before {
     pointer-events: auto;
 }
-
-
-/* Orange */
 
 .sec-3 {
     background-color: #FBDC8F;
@@ -2009,7 +1802,149 @@ img[alt="img-right"].show {
 /* Emerald */
 
 .sec-8 {
-    background-color: #14b8a6;
+    background-color: #FBDC8F;
+}
+
+
+/* text-may */
+
+.sec-8 h1 {
+    color: #E95A0C;
+    font-size: 64px;
+    position: relative;
+    left: 0%;
+    top: -35%;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* brown-box */
+
+.brown-boxright {
+    background-color: #834929;
+    border-radius: 10%;
+    position: absolute;
+    height: 490px;
+    width: 25%;
+    left: 53%;
+    top: 32%;
+    z-index: 10;
+}
+
+.brown-boxleft {
+    background-color: #834929;
+    border-radius: 10%;
+    position: absolute;
+    height: 435px;
+    width: 28%;
+    left: 21%;
+    top: 32%;
+    z-index: 10;
+}
+
+.may-inforright {
+    background-color: #FAEBD6;
+    border-radius: 10%;
+    position: absolute;
+    height: 500px;
+    width: 25%;
+    left: 54%;
+    top: 28%;
+    z-index: 11;
+}
+
+.may-inforright p {
+    font-size: 36px;
+    color: #000000;
+    text-align: center;
+    position: relative;
+    top: -10%;
+    font-weight: bold;
+}
+
+.may-inforright span {
+    color: #E95A0C;
+    font-weight: bold;
+}
+
+.may-videoleft {
+    background-color: #FAEBD6;
+    border-radius: 10%;
+    position: absolute;
+    height: 400px;
+    width: 28%;
+    left: 22%;
+    top: 28%;
+    z-index: 11;
+}
+
+.may-videoleft iframe {
+    border-radius: 10%;
+    position: relative;
+    border: none;
+    height: 300px;
+    width: 90%;
+    top: 10%;
+    left: 5%;
+}
+
+.spantwo {
+    color: #FAEBD6;
+    position: absolute;
+    top: 71%;
+    left: 23%;
+    z-index: 12;
+}
+
+.spantwo a {
+    color: #FAEBD6;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .sec-8 h1 {
+        font-size: 60px;
+        top: -33%;
+    }
+    .brown-boxright {
+        height: 480px;
+        width: 38%;
+        left: 57%;
+        top: 37%;
+    }
+    .brown-boxleft {
+        height: 415px;
+        width: 47%;
+        left: 5%;
+        top: 37%;
+    }
+    .may-inforright {
+        height: 500px;
+        width: 37%;
+        left: 60%;
+        top: 33%;
+    }
+    .may-inforright p {
+        font-size: 24px;
+        top: 10%;
+    }
+    .may-videoleft {
+        height: 380px;
+        width: 47%;
+        left: 7%;
+        top: 34%;
+    }
+    .may-videoleft iframe {
+        height: 300px;
+        width: 90%;
+        top: 10%;
+        left: 5%;
+    }
+    .spantwo {
+        top: 70%;
+        left: 10%;
+    }
 }
 
 
@@ -2035,8 +1970,6 @@ img[alt="img-right"].show {
     font-size: clamp(24px, 5vw, 64px);
     line-height: 1.4;
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
-    /* เพิ่มขอบขาวจางๆ ให้อ่านง่ายขึ้นทับรูป */
     position: relative;
     z-index: 1;
 }
@@ -2443,14 +2376,151 @@ img[alt="img-right"].show {
 /* Sky */
 
 .sec-11 {
-    background-color: #3b82f6;
+    background-color: #FBDC8F;
+}
+
+
+/* กล่องข้อความ (อยู่ชั้นบน) */
+
+.sec11-container {
+    position: relative;
+    z-index: 2;
+    /* สำคัญ: ต้องมากกว่า BG (1) */
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
+}
+
+
+/* หัวข้อแบบ Responsive */
+
+.sec11-title {
+    color: #8A5436;
+    /* สีน้ำตาลตามโค้ดเดิม */
+    /* ใช้ clamp: เล็กสุด 24px | ปกติ 5% ของจอ | ใหญ่สุด 42px */
+    font-size: clamp(24px, 5vw, 42px);
+    line-height: 1.5;
+    font-weight: bold;
+    /* เพิ่มเงาขาวรอบตัวหนังสือ เพื่อให้อ่านง่ายเมื่อทับรูป */
+}
+
+
+/* คำเน้นสีส้ม */
+
+.highlightsec11 {
+    font-weight: 800;
+    font-size: 64px;
+}
+
+
+/* รูปพื้นหลัง (อยู่ชั้นล่าง) */
+
+.sec11-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* จัดกึ่งกลางรูป */
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    /* ขยายเต็มพื้นที่โดยสัดส่วนไม่เพี้ยน */
+    z-index: 1;
+    /* อยู่ด้านหลังสุด */
+    opacity: 0.8;
+    /* (ทางเลือก) ปรับจางลงนิดหน่อยให้อ่านง่ายขึ้น */
+}
+
+.criticalpicture {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 10%;
+}
+
+
+/* --- Responsive เพิ่มเติม --- */
+
+@media (max-width: 600px) {
+    .sec11-title br {
+        display: none;
+        /* มือถืออาจจะไม่ต้องเว้นบรรทัด ถ้าอยากให้ไหลต่อเนื่อง */
+    }
 }
 
 
 /* Blue */
 
 .sec-12 {
-    background-color: #6366f1;
+    background-color: #FBDC8F;
+}
+
+
+/* กล่องข้อความ (อยู่ชั้นบน) */
+
+.sec12-container {
+    position: relative;
+    z-index: 2;
+    /* สำคัญ: ต้องมากกว่า BG (1) */
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
+}
+
+
+/* หัวข้อแบบ Responsive */
+
+.sec12-title {
+    color: #8A5436;
+    /* สีน้ำตาลตามโค้ดเดิม */
+    /* ใช้ clamp: เล็กสุด 24px | ปกติ 5% ของจอ | ใหญ่สุด 42px */
+    font-size: clamp(24px, 5vw, 42px);
+    line-height: 1.5;
+    font-weight: bold;
+    /* เพิ่มเงาขาวรอบตัวหนังสือ เพื่อให้อ่านง่ายเมื่อทับรูป */
+}
+
+
+/* คำเน้นสีส้ม */
+
+.highlightsec12 {
+    font-weight: 800;
+    color: orangered;
+}
+
+.highlight2sec12 {
+    font-weight: 800;
+    color: rgb(226, 0, 0);
+}
+
+
+/* รูปพื้นหลัง (อยู่ชั้นล่าง) */
+
+.sec12-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* จัดกึ่งกลางรูป */
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    /* ขยายเต็มพื้นที่โดยสัดส่วนไม่เพี้ยน */
+    z-index: 1;
+    /* อยู่ด้านหลังสุด */
+    opacity: 0.8;
+    /* (ทางเลือก) ปรับจางลงนิดหน่อยให้อ่านง่ายขึ้น */
+}
+
+@media (max-width: 600px) {
+    .sec12-title br {
+        display: none;
+        /* มือถืออาจจะไม่ต้องเว้นบรรทัด ถ้าอยากให้ไหลต่อเนื่อง */
+    }
 }
 
 
@@ -2649,28 +2719,14 @@ img[alt="img-right"].show {
         overflow-x: auto;
         /* ให้เลื่อนแนวนอนได้ถ้าแผนที่ล้น */
     }
-    /* ปรับตำแหน่งปุ่มหมุดให้เล็กลง */
-    [class^="pin-btn"] {
-        transform: scale(2) !important;
-        /* ลดขนาดหมุด */
-    }
     /* สำคัญ: ปรับ Info Card ให้เป็น Popup ตรงกลางจอแทนการลอยข้างปุ่ม */
     .info-card {
         position: fixed;
-        /* ลอยอิสระจากปุ่ม */
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
         /* จัดกึ่งกลางจอ */
         width: 90vw;
-        /* กว้าง 90% ของจอ */
         max-height: 60vh;
-        /* สูงไม่เกิน 60% ของจอ */
         overflow-y: auto;
-        /* มี scrollbar ถ้าเนื้อหายาว */
         z-index: 9999;
-        box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.7);
-        /* ทำฉากหลังมืด */
     }
     /* ซ่อนสามเหลี่ยมชี้ เพราะตอนนี้อยู่กลางจอแล้ว */
     .info-card::before {
@@ -2806,5 +2862,207 @@ img[alt="img-right"].show {
     .slider-controls {
         flex-wrap: wrap;
         /* เผื่อปุ่มล้น */
+    }
+}
+
+
+/* =================================================
+   [Desktop Only] ย้ายกล่องไปทางซ้าย (สำหรับข้อมูลเยอะ)
+   เฉพาะหน้าจอคอมพิวเตอร์ (กว้างกว่า 768px)
+================================================= */
+
+@media (min-width: 769px) {
+    /* ระบุปุ่มที่ต้องการให้กล่องออกทางซ้าย (เช่น pin-btn1 เชียงราย) */
+    .pin-btn1 .info-card,
+    .pin-btn2 .info-card,
+    .pin-btn3 .info-card,
+    .pin-btn4 .info-card,
+    .pin-btn5 .info-card,
+    .pin-btn6 .info-card {
+        /* ถ้าปุ่ม 2 (เลย) อยากให้ออกซ้ายด้วย ก็ใส่เพิ่มตรงนี้ */
+        /* ล้างค่าเดิม (ที่เด้งขึ้นบน) ทิ้ง */
+        bottom: auto;
+        left: auto;
+        transform: none;
+        /* กำหนดตำแหน่งใหม่: ให้ออกทางซ้าย */
+        top: 50%;
+        /* ให้อยู่กึ่งกลางปุ่มแนวตั้ง */
+        right: 140%;
+        /* ดันไปทางซ้ายของปุ่ม (ปรับเลขนี้ได้ถ้าอยากให้ห่างขึ้น) */
+        transform: translateY(-50%);
+        /* จัดกึ่งกลางแนวตั้งให้เป๊ะ */
+    }
+    /* --- แก้ไขสามเหลี่ยมชี้ (ให้ชี้ไปทางขวาหาปุ่ม) --- */
+    .pin-btn1 .info-card::after,
+    .pin-btn2 .info-card::after,
+    .pin-btn3 .info-card::after,
+    .pin-btn4 .info-card::after,
+    .pin-btn5 .info-card::after,
+    .pin-btn6 .info-card::after {
+        /* ล้างค่าเดิม */
+        bottom: auto;
+        left: auto;
+        transform: none;
+        /* จัดตำแหน่งสามเหลี่ยมไปไว้ขวาสุดของกล่อง */
+        top: 50%;
+        right: -15px;
+        /* ยื่นออกไปทางขวา */
+        transform: translateY(-50%);
+        /* วาดสามเหลี่ยมใหม่ ให้หัวชี้ไปทางขวา */
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 15px solid white;
+        /* สีขาวชี้ไปทางขวา */
+        border-right: none;
+    }
+    /* Animation ตอนโผล่มา (ให้เด้งจากขวามาซ้ายเบาๆ) */
+    .pin-btn1:hover .info-card,
+    .pin-btn2:hover .info-card,
+    .pin-btn3:hover .info-card,
+    .pin-btn4:hover .info-card,
+    .pin-btn5:hover .info-card,
+    .pin-btn6:hover .info-card {
+        transform: translateY(-50%) translateX(-10px);
+    }
+}
+
+
+/* =========================================
+   Force Height Adjustment on Mobile/Tablet
+   (เพิ่มโค้ดส่วนนี้ไว้ล่างสุดของไฟล์ style.css)
+========================================= */
+
+@media (max-width: 1024px) {
+    .full-section {
+        height: auto !important;
+        /* บังคับให้สูงตามเนื้อหา */
+        min-height: 100vh !important;
+        /* อย่างน้อยต้องเต็มจอ */
+        padding-top: 80px !important;
+        /* เพิ่มพื้นที่ด้านบน */
+        padding-bottom: 80px !important;
+        /* เพิ่มพื้นที่ด้านล่าง */
+        display: flex;
+        flex-direction: column;
+        /* บังคับเรียงเนื้อหาลงมาแนวตั้ง */
+        justify-content: flex-start;
+        /* เริ่มเรียงจากด้านบน ไม่ใช่ตรงกลาง */
+    }
+    /* แก้ไขส่วน Hero Section ไม่ให้เพี้ยน */
+    header.hero-section {
+        height: 100vh;
+        /* Hero ยังคงเต็มจอได้ */
+        min-height: auto;
+        padding: 0;
+    }
+}
+
+
+/* =======================
+   Mobile Popup Styles
+======================= */
+
+
+/* พื้นหลังมืดๆ */
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    /* สีดำจางๆ */
+    z-index: 99999;
+    /* อยู่บนสุดของทุกอย่าง */
+    display: none;
+    /* ซ่อนไว้ก่อน */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+    /* เบลอฉากหลังให้ดูสวย */
+}
+
+
+/* คลาสสำหรับแสดง Popup */
+
+.popup-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+
+/* กล่องเนื้อหาขาวๆ ตรงกลาง */
+
+.popup-content {
+    background: white;
+    width: 85%;
+    max-width: 400px;
+    max-height: 70vh;
+    /* สูงไม่เกิน 70% ของจอ */
+    overflow-y: auto;
+    /* ถ้าเนื้อหาเยอะให้เลื่อนได้ */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 2px solid orangered;
+    position: relative;
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+/* Animation ตอนเด้งขึ้นมา */
+
+.popup-overlay.active .popup-content {
+    transform: scale(1);
+}
+
+
+/* ปุ่มปิด (X) */
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #f1f1f1;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* --- CSS สำหรับซ่อน Info Card แบบเก่าในมือถือ --- */
+
+@media (max-width: 768px) {
+    /* ซ่อนกล่อง Hover เดิมทิ้งไปเลยในมือถือ */
+    .info-card {
+        display: none !important;
+    }
+    /* ปรับขนาดตัวอักษรใน Popup */
+    #popup-body h3 {
+        color: orangered;
+        margin-top: 0;
+        font-size: 22px;
+    }
+    #popup-body h4 {
+        color: #d84315;
+        font-size: 18px;
+        margin-top: 15px;
+    }
+    #popup-body p,
+    #popup-body li {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
     }
 }

@@ -220,3 +220,48 @@
                         observerSec10.observe(sec10);
                     }
                 });
+                document.addEventListener("DOMContentLoaded", () => {
+                    const popupOverlay = document.getElementById('mobile-popup');
+                    const popupBody = document.getElementById('popup-body');
+                    const closeBtn = document.querySelector('.close-btn');
+                    const allPins = document.querySelectorAll('[class^="pin-btn"]');
+
+                    // ฟังก์ชันเปิด Popup
+                    function openPopup(content) {
+                        popupBody.innerHTML = content; // เอาเนื้อหา html ใส่เข้าไป
+                        popupOverlay.classList.add('active'); // แสดง Popup
+                    }
+
+                    // ฟังก์ชันปิด Popup
+                    function closePopup() {
+                        popupOverlay.classList.remove('active');
+                    }
+
+                    // วนลูปเช็คทุกปุ่มหมุด
+                    allPins.forEach(pin => {
+                        pin.addEventListener('click', (e) => {
+                            // ทำงานเฉพาะหน้าจอเล็กกว่า 900px (มือถือ/แท็บเล็ต)
+                            if (window.innerWidth <= 900) {
+                                e.stopPropagation(); // ป้องกันไม่ให้ event ชนกัน
+
+                                // หา info-card ข้างในปุ่มนั้น
+                                const infoCard = pin.querySelector('.info-card');
+
+                                if (infoCard) {
+                                    // ส่งเนื้อหา HTML ไปให้ Popup แสดง
+                                    openPopup(infoCard.innerHTML);
+                                }
+                            }
+                        });
+                    });
+
+                    // กดปุ่ม X เพื่อปิด
+                    closeBtn.addEventListener('click', closePopup);
+
+                    // กดพื้นที่ว่างๆ (Backdrop) เพื่อปิด
+                    popupOverlay.addEventListener('click', (e) => {
+                        if (e.target === popupOverlay) {
+                            closePopup();
+                        }
+                    });
+                });
