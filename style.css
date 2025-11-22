@@ -511,7 +511,7 @@ header::before {
     color: #886250;
     position: relative;
     top: -40%;
-    left: 68%;
+    left: 50%;
     /* เพิ่ม 2 บรรทัดนี้ครับ */
     transform: translateX(-50%);
     /* ดึงกลับมาให้กึ่งกลางเป๊ะๆ */
@@ -546,24 +546,33 @@ header::before {
 
 .image-container.show {
     opacity: 1;
-    transform: scale(1.05);
+    transform: scale(1.7);
     /* ค่อย ๆ ขยายกลับมาขนาดจริง */
 }
 
-.image-container span {
-    position: absolute;
-    display: flex;
-    font-size: 10px;
-    font-weight: bold;
-    color: rgb(151, 0, 0);
-    transition: color 0.4s ease;
+
+/* ⭐ หัวใจสำคัญ: wrapper จะหดตัวเท่าขนาดรูปภาพ ⭐ */
+
+.map-wrapper {
+    position: relative;
+    /* เป็นจุดอ้างอิงให้ปุ่ม */
+    display: inline-block;
+    /* หดตัวรัดรูปภาพ */
+    width: auto;
+    line-height: 0;
+    /* ลบช่องว่างใต้รูป */
 }
 
-.image-container.show span {
-    opacity: 1;
-    transition: opacity 3s ease;
-    transition-delay: 3s;
-    animation: slideUp 1s ease-out 4s forwards;
+
+/* สั่งให้รูปภาพปรับขนาดตาม wrapper (ซึ่ง wrapper ก็ปรับตามรูป) */
+
+.map-wrapper img {
+    display: block;
+    width: auto;
+    /* หรือ 100% */
+    max-width: 100%;
+    /* ห้ามเกินจอ */
+    height: auto;
 }
 
 .pin-btn1.show {
@@ -879,7 +888,7 @@ header::before {
     /* ปรับตำแหน่งแกน Y */
     left: 40px;
     /* ปรับตำแหน่งแกน X (ให้ห่างจากปุ่มไปทางขวา) */
-    width: 850px;
+    width: 700px;
     /* ความกว้างของกล่องข้อความ */
     background-color: white;
     border-radius: 15px;
@@ -887,7 +896,7 @@ header::before {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     /* เงาฟุ้งๆ */
     text-align: left;
-    font-size: 28px;
+    font-size: 20px;
     /* ขนาดตัวอักษรพื้นฐาน */
     color: #333;
     z-index: 100;
@@ -925,7 +934,7 @@ header::before {
 .card-title {
     color: #ff4500;
     /* สีส้มหัวข้อใหญ่ */
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
     margin-bottom: 8px;
     margin-top: 0;
@@ -934,7 +943,7 @@ header::before {
 .card-subtitle {
     color: #ff4500;
     /* สีส้มหัวข้อย่อย */
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
     margin-top: 12px;
     margin-bottom: 5px;
