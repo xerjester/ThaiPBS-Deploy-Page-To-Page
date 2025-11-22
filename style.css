@@ -2016,14 +2016,427 @@ img[alt="img-right"].show {
 /* Teal */
 
 .sec-9 {
-    background-color: #06b6d4;
+    background-color: #FBDC8F;
+}
+
+.sec9-container {
+    position: relative;
+    z-index: 2;
+    /* ให้ข้อความอยู่เหนือรูปภาพเสมอ */
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.sec9-title {
+    color: #8A5436;
+    /* ใช้ clamp เพื่อให้ตัวหนังสือยืดหดตามขนาดจออัตโนมัติ */
+    /* ขั้นต่ำ 24px, ปกติ 5vw, สูงสุด 64px */
+    font-size: clamp(24px, 5vw, 64px);
+    line-height: 1.4;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+    /* เพิ่มขอบขาวจางๆ ให้อ่านง่ายขึ้นทับรูป */
+    position: relative;
+    z-index: 1;
+}
+
+.sec9-title .highlight-text {
+    color: orangered;
+    display: inline-block;
+    /* ป้องกันคำตกหล่นไม่สวย */
+}
+
+.sec9-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* จัดกึ่งกลางรูปภาพ */
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    /* อยู่หลังข้อความ */
+    object-fit: cover;
+    /* ให้รูปภาพขยายเต็มพื้นที่โดยไม่เสียสัดส่วน */
+    opacity: 0.8;
+    /* (ทางเลือก) ปรับจางลงนิดหน่อยเพื่อให้เห็นข้อความชัด */
+}
+
+
+/* --- Responsive เพิ่มเติมสำหรับมือถือ --- */
+
+@media (max-width: 768px) {
+    .sec9-title {
+        /* ปรับระยะบรรทัดในมือถือให้ชิดกันหน่อย */
+        line-height: 1.3;
+    }
+    .sec9-title br {
+        /* (ทางเลือก) ซ่อนการเว้นบรรทัดในมือถือถ้ามันทำให้ข้อความขาดๆ เกินๆ */
+        /* display: none; */
+    }
 }
 
 
 /* Cyan */
 
 .sec-10 {
-    background-color: #0ea5e9;
+    background-color: #FBDC8F;
+}
+
+.sec10-container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+
+/* --- Layout ซ้าย/ขวา --- */
+
+.sec10-left {
+    flex: 1.2;
+    /* กราฟใหญ่กว่านิดหน่อย */
+    width: 100%;
+    padding: 10%;
+}
+
+.sec10-right {
+    flex: 1;
+    color: #8A5436;
+}
+
+
+/* --- ข้อมูลฝั่งขวา --- */
+
+.sec10-heading {
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.sec10-desc {
+    font-size: clamp(16px, 1.2vw, 20px);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.sec10-list li {
+    font-size: 18px;
+    margin-bottom: 10px;
+    list-style: circle;
+    margin-left: 20px;
+}
+
+
+/* =======================
+   Section 10 Info List Styles
+======================= */
+
+.sec10-info-list {
+    list-style: none;
+    /* ลบจุด Bullet เดิมออก */
+    padding: 0;
+    margin: 0;
+}
+
+.sec10-info-list li {
+    position: relative;
+    padding-left: 25px;
+    /* เว้นที่สำหรับจุด Bullet ใหม่ */
+    margin-bottom: 20px;
+    /* ระยะห่างระหว่างบรรทัด */
+    color: #8A5436;
+    /* สีน้ำตาลเข้ม (สีหลัก) */
+    font-size: clamp(16px, 1.2vw, 20px);
+    /* ขนาดตัวอักษร Responsive */
+    line-height: 1.6;
+}
+
+
+/* สร้างจุด Bullet สีน้ำตาลเอง */
+
+.sec10-info-list li::before {
+    content: "•";
+    color: #8A5436;
+    font-weight: bold;
+    font-size: 1.5em;
+    position: absolute;
+    left: 0;
+    top: -5px;
+    /* ปรับตำแหน่งจุดให้ตรงบรรทัด */
+}
+
+
+/* หัวข้อตัวหนาในแต่ละข้อน */
+
+.sec10-info-list li strong {
+    font-weight: 800;
+    /* หนาพิเศษ */
+}
+
+
+/* คลาสสีส้มสำหรับเน้นข้อความ */
+
+.text-orange {
+    color: orangered;
+    font-weight: bold;
+}
+
+
+/* --- Responsive Layout (Mobile) --- */
+
+@media (max-width: 900px) {
+    .sec10-info-list li {
+        margin-bottom: 15px;
+        text-align: left;
+        /* จัดชิดซ้ายให้อ่านง่ายในมือถือ */
+    }
+}
+
+
+/* --- Chart Styles (กล่องกราฟ) --- */
+
+.chart-box {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.chart-legend-dot {
+    width: 15px;
+    height: 15px;
+    background-color: #00bcd4;
+    /* สีฟ้า Cyan ตามรูป */
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.chart-title {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.chart-body {
+    position: relative;
+    height: 350px;
+    padding-left: 50px;
+    /* เว้นที่ให้ตัวเลขแกน Y */
+    padding-bottom: 30px;
+    /* เว้นที่ให้ตัวเลขปีแกน X */
+}
+
+
+/* Grid Lines (เส้นบรรทัด) */
+
+.chart-grid {
+    position: absolute;
+    top: 0;
+    left: 50px;
+    right: 0;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+.grid-line {
+    width: 100%;
+    border-top: 1px solid #eee;
+    position: relative;
+}
+
+
+/* ตัวเลขแกน Y */
+
+.grid-line::before {
+    content: attr(data-value);
+    position: absolute;
+    left: -60px;
+    top: -10px;
+    font-size: 14px;
+    color: #666;
+    width: 50px;
+    text-align: right;
+}
+
+
+/* Bars Container */
+
+.chart-bars {
+    position: absolute;
+    top: 0;
+    left: 50px;
+    right: 0;
+    bottom: 30px;
+    display: flex;
+    align-items: flex-end;
+    /* ให้แท่งงอกขึ้นจากข้างล่าง */
+    justify-content: space-between;
+    z-index: 2;
+    padding: 0 10px;
+}
+
+.bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 12%;
+    /* ความกว้างของแต่ละแท่ง */
+    height: 100%;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.bar-wrapper {
+    width: 100%;
+    height: 100%;
+    /* พื้นที่เต็มความสูง */
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+}
+
+
+/* ตัวแท่งกราฟจริง */
+
+.bar-fill {
+    width: 100%;
+    background-color: #00bcd4;
+    /* สีฟ้า Cyan */
+    border-radius: 6px 6px 0 0;
+    height: 0%;
+    /* เริ่มต้น 0 รอ Animation */
+    transition: height 1s ease-out;
+    position: relative;
+    cursor: pointer;
+}
+
+.year-label {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+}
+
+
+/* Tooltip (แสดงตัวเลขเมื่อชี้) */
+
+.bar-tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.bar-wrapper:hover .bar-tooltip {
+    opacity: 1;
+}
+
+.bar-wrapper:hover .bar-fill {
+    background-color: #00acc1;
+    /* สีเข้มขึ้นตอนชี้ */
+}
+
+
+/* --- Animation Classes --- */
+
+
+/* เมื่อมี class .show ให้แท่งยืดขึ้นตามค่า --h */
+
+.sec-10.show .bar-fill {
+    height: var(--h);
+}
+
+
+/* Delay ให้แต่ละแท่งขึ้นไม่พร้อมกันเพื่อความสวยงาม */
+
+.sec-10.show .bar-group:nth-child(1) .bar-fill {
+    transition-delay: 0.1s;
+}
+
+.sec-10.show .bar-group:nth-child(2) .bar-fill {
+    transition-delay: 0.2s;
+}
+
+.sec-10.show .bar-group:nth-child(3) .bar-fill {
+    transition-delay: 0.3s;
+}
+
+.sec-10.show .bar-group:nth-child(4) .bar-fill {
+    transition-delay: 0.4s;
+}
+
+.sec-10.show .bar-group:nth-child(5) .bar-fill {
+    transition-delay: 0.5s;
+}
+
+.sec-10.show .bar-group:nth-child(6) .bar-fill {
+    transition-delay: 0.6s;
+}
+
+
+/* --- Responsive (Mobile) --- */
+
+@media (max-width: 900px) {
+    .sec10-container {
+        flex-direction: column;
+        /* เรียงลงแนวตั้ง */
+        gap: 3rem;
+    }
+    .sec10-left,
+    .sec10-right {
+        flex: auto;
+        width: 100%;
+    }
+    .chart-box {
+        padding: 20px;
+    }
+    .chart-body {
+        padding-left: 35px;
+    }
+    .chart-grid {
+        left: 35px;
+    }
+    .chart-bars {
+        left: 35px;
+    }
+    .grid-line::before {
+        font-size: 10px;
+        left: -40px;
+        width: 35px;
+    }
+    .year-label {
+        font-size: 12px;
+    }
 }
 
 

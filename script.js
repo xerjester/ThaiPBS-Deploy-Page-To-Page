@@ -205,3 +205,18 @@
                         dots[slideIndex].classList.add('active');
                     }
                 }
+
+                // เพิ่มการ Observe เฉพาะ Sec-10 เพื่อเล่นกราฟ
+                document.addEventListener("DOMContentLoaded", () => {
+                    const sec10 = document.querySelector(".sec-10");
+                    if (sec10) {
+                        const observerSec10 = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add("show");
+                                }
+                            });
+                        }, { threshold: 0.3 });
+                        observerSec10.observe(sec10);
+                    }
+                });
