@@ -3340,8 +3340,17 @@ fishing-container1 {
 
 /* 1. ขยายกล่องให้กว้างขึ้นเฉพาะ Section 18 */
 
+.main-title {
+    position: relative;
+    color: #09324E;
+    margin-top: -35%;
+    z-index: 10;
+}
+
 .sec-18 .card-wrapper,
 .sec-18 .box-white {
+    position: absolute;
+    top: 10%;
     max-width: 1300px !important;
     /* ขยายจาก 1000px เป็น 1300px */
     width: 100%;
@@ -3349,8 +3358,11 @@ fishing-container1 {
 }
 
 .sec-18 .box-orange {
+    position: absolute;
     left: -2%;
-    width: 100%;
+    top: 25%;
+    height: 130%;
+    width: 105%;
 }
 
 
@@ -3978,5 +3990,264 @@ fishing-container1 {
         font-size: 16px;
         line-height: 1.6;
         color: #333;
+    }
+}
+
+
+/* ==========================================================================
+   LAPTOP & SMALL DESKTOP RESPONSIVE (Max Width 1440px)
+   สำหรับหน้าจอ Laptop ทั่วไป (1366px, 1440px) ที่ไม่ใช่ 4K
+   ========================================================================== */
+
+@media screen and (max-width: 1440px) {
+    /* --- Global Adjustments --- */
+    .full-section {
+        min-height: auto !important;
+        /* ปลดล็อกความสูง */
+        padding: 60px 0;
+        /* ลด padding บนล่าง */
+    }
+    h1 {
+        font-size: 2.5rem !important;
+    }
+    /* ลดขนาดหัวข้อหลัก */
+    h2 {
+        font-size: 2rem !important;
+    }
+    p {
+        font-size: 1rem !important;
+    }
+    /* --- Sec-3 (Grass & Ship) --- */
+    .water-container {
+        height: 200px;
+        /* ลดความสูงน้ำ */
+        bottom: -10%;
+        /* ขยับตำแหน่ง */
+    }
+    /* ปรับขนาดหญ้าให้เล็กลง */
+    [class^="grass-layer"] {
+        width: clamp(200px, 15vw, 400px);
+    }
+    .layer11 {
+        /* เรือ */
+        width: 250px;
+        right: 5%;
+    }
+    /* --- Sec-4 (Plants) --- */
+    .testContainer h1 {
+        font-size: 42px;
+        /* ลดขนาดหัวข้อ */
+    }
+    .imageBox img {
+        max-height: 300px;
+        /* ลดขนาดรูปต้นไม้ */
+    }
+    .imageBox p {
+        font-size: 20px;
+    }
+    /* --- Sec-5 (Quote) --- */
+    .drama-quote {
+        font-size: 36px;
+        /* ลดขนาดคำคม */
+    }
+    /* --- Sec-6 (Intro Crisis) --- */
+    .sec-6 h1 {
+        font-size: 48px;
+    }
+    img[alt="img-left"],
+    img[alt="img-right"] {
+        width: 25%;
+        /* ลดขนาดรูปตกแต่งข้างๆ */
+    }
+    /* --- Sec-7 & Sec-18 (Sliders) --- */
+    .crisis-container,
+    .sec-18 .card-wrapper {
+        max-width: 90%;
+        /* ให้กล่องกว้างขึ้นในจอเล็ก */
+    }
+    .box-white {
+        padding: 30px;
+        /* ลดพื้นที่ว่างในกล่อง */
+        min-height: auto;
+    }
+    .slide-img img {
+        max-height: 250px;
+        /* จำกัดความสูงรูปในสไลด์ */
+    }
+    .slide-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    /* ปรับ Sec-18 (Story) ให้รูปกับข้อความสมดุลในจอ Laptop */
+    .sec-18 .slide-img {
+        flex: 0 0 280px;
+        /* ลดขนาดรูป */
+    }
+    .sec-18 .slide-text h3 {
+        font-size: 24px;
+    }
+    /* --- Sec-8 (May Report - Layout ยากสุด) --- */
+    /* ปรับตำแหน่งกล่องซ้อนทับให้พอดีจอ Laptop */
+    .sec-8 h1 {
+        font-size: 42px;
+        top: -15%;
+        /* ขยับขึ้น */
+    }
+    .brown-boxleft,
+    .brown-boxright,
+    .may-inforright,
+    .may-videoleft {
+        transform: scale(0.85);
+        /* ย่อทุกอย่างลง 15% */
+    }
+    .may-inforright {
+        top: 15%;
+        /* ปรับตำแหน่ง */
+    }
+    .may-videoleft {
+        top: 15%;
+    }
+    .brown-boxright {
+        top: 20%;
+    }
+    .brown-boxleft {
+        top: 20%;
+    }
+    .may-inforright p {
+        font-size: 24px;
+        /* ลดขนาดฟอนต์ในกล่อง */
+        line-height: 1.4;
+    }
+    .spantwo {
+        top: 80%;
+        /* ขยับลิงก์อ้างอิง */
+        font-size: 14px;
+    }
+    /* --- Sec-9 (Kitchen BG) --- */
+    .sec9-title {
+        font-size: 42px;
+    }
+    /* --- Sec-10 (Chart) --- */
+    .sec10-container {
+        gap: 2rem;
+    }
+    .chart-box {
+        padding: 20px;
+    }
+    .chart-body {
+        height: 250px;
+        /* ลดความสูงกราฟ */
+    }
+    .sec10-info-list li {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    /* --- Sec-11 & 12 (Critical Images) --- */
+    .sec11-title,
+    .sec12-title {
+        font-size: 36px;
+    }
+    .highlightsec11 {
+        font-size: 48px;
+    }
+    /* --- Sec-13, 14, 15 (Fishing Equipment) --- */
+    .mesh-container {
+        height: 100vh;
+        /* ลดความสูง */
+    }
+    .text-mesh {
+        font-size: 42px;
+        top: 25%;
+    }
+    /* ปรับตำแหน่งรูปอุปกรณ์หาปลา */
+    .image-fishing img,
+    .image-fishing1 img {
+        top: 100px;
+        /* ดันรูปลงมาน้อยลง */
+        max-height: 400px;
+        width: auto;
+    }
+    .text-fishing,
+    .text-fishing1 {
+        font-size: 36px;
+        top: 5%;
+        /* ขยับข้อความขึ้น */
+    }
+    .text-fishing span,
+    .text-fishing1 span {
+        font-size: 48px;
+    }
+    /* ปรับตำแหน่งและขนาดเครื่องมือ (e-1 ถึง e-6) */
+    .e-1,
+    .e-2,
+    .e-3,
+    .e-4,
+    .e-5,
+    .e-6 {
+        height: 60%;
+        /* ลดขนาดรูปลง */
+        width: auto;
+    }
+    /* --- Sec-16 (Quiz Entry) --- */
+    .sec16-question {
+        font-size: 42px !important;
+        /* บังคับลดขนาด */
+        margin-bottom: 30px;
+    }
+    .game-btn img {
+        width: 220px;
+        /* ลดขนาดปุ่มเริ่มเกม */
+    }
+    /* --- Sec-17 (Story Cover) --- */
+    .sec17-title {
+        font-size: 80px;
+        /* ลดจาก 120px */
+    }
+    /* --- Sec-19 (References) --- */
+    .ref-container {
+        left: 0;
+        /* จัดกลางปกติ */
+        margin: 0 auto;
+    }
+    .ref-content p {
+        font-size: 14px;
+        /* ลดขนาด text อ้างอิง */
+        margin-bottom: 8px;
+    }
+}
+
+
+/* ==========================================================================
+   SMALL LAPTOP SPECIFIC (1366px and below)
+   สำหรับจอโน้ตบุ๊กขนาดเล็ก 1366x768 หรือ 1280x800
+   ========================================================================== */
+
+@media screen and (max-width: 1366px) {
+    .full-section {
+        padding: 40px 0;
+    }
+    /* ปรับ Sec-8 เพิ่มเติมสำหรับจอเตี้ย */
+    .sec-8 h1 {
+        font-size: 36px;
+        top: -10%;
+    }
+    .brown-boxleft,
+    .brown-boxright,
+    .may-inforright,
+    .may-videoleft {
+        transform: scale(0.75);
+        /* ย่อลงอีก */
+    }
+    /* ปรับ Slider */
+    .slide-text {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    .slide-text h3 {
+        font-size: 18px;
+    }
+    /* ปรับ Chart */
+    .chart-box {
+        transform: scale(0.9);
     }
 }
