@@ -76,6 +76,90 @@
                 });
 
                 document.addEventListener("DOMContentLoaded", () => {
+                    // 1. เลือก Elements ที่ต้องการให้มี Animation (หัวข้อ, รูป, กล่องข้อความ, การ์ด)
+                    const elementsToAnimate = document.querySelectorAll(`
+        h1, h2, h3, p, 
+        .stat-card, 
+        .image-wrapper, 
+        .slide-item, 
+        .box-white, 
+        .box-orange,
+        .chart-box, 
+        .sec10-right,
+        .imageBox,
+        .may-inforright,
+        .may-videoleft,
+        .brown-boxright,
+        .brown-boxleft,
+        .ref-content p,
+        .image-fishing,
+        .image-fishing1,
+        .text-fishing,
+        .text-fishing1,
+        .sec16-question,
+        .game-btn,
+        .sec17-title,
+        .main-title
+    `);
+
+                    // 2. ใส่ class 'reveal' ให้ทุกตัวที่เลือก (เพื่อซ่อนก่อน)
+                    elementsToAnimate.forEach(el => {
+                        el.classList.add('reveal');
+                    });
+
+                    // 3. สร้าง Observer
+                    const observer = new IntersectionObserver((entries, obs) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                // เมื่อเลื่อนมาเจอ ให้ใส่ class 'active' (เพื่อให้ลอยขึ้นมา)
+                                entry.target.classList.add('active');
+
+                                // (Optional) หยุดสังเกตเพื่อไม่ให้เล่นซ้ำไปซ้ำมา
+                                obs.unobserve(entry.target);
+                            }
+                        });
+                    }, {
+                        threshold: 0.15, // ต้องเห็นสัก 15% ก่อนถึงจะเล่น
+                        rootMargin: "0px 0px -50px 0px" // ให้เลยขอบล่างจอมานิดนึงค่อยเล่น
+                    });
+
+                    // 4. เริ่มจับตาดูทุกตัว
+                    elementsToAnimate.forEach(el => {
+                        observer.observe(el);
+                    });
+
+                    // --- จัดการ Animation พิเศษ (ของเดิมที่มีอยู่) ---
+                    const specificObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                // Sec-3: น้ำและเรือ
+                                if (entry.target.classList.contains('water-container')) {
+                                    entry.target.classList.add("show");
+                                    const ship = document.querySelector('.layer11');
+                                    const ground = document.querySelector('.ground');
+                                    if (ship) ship.classList.add("show");
+                                    if (ground) ground.classList.add("show");
+                                }
+                                // Sec-2: แผนที่
+                                if (entry.target.classList.contains('image-container')) {
+                                    entry.target.classList.add("show");
+                                    // ดีเลย์ให้ปุ่มหมุดเด้งตามมา
+                                    document.querySelectorAll('[class^="pin-btn"]').forEach(btn => btn.classList.add('show'));
+                                }
+                                // Sec-10: กราฟ
+                                if (entry.target.classList.contains('sec-10')) {
+                                    entry.target.classList.add("show");
+                                }
+                            }
+                        });
+                    }, { threshold: 0.2 });
+
+                    // สังเกตตัวพิเศษ
+                    const specialElements = document.querySelectorAll('.water-container, .image-container, .sec-10');
+                    specialElements.forEach(el => specificObserver.observe(el));
+                });
+
+                document.addEventListener("DOMContentLoaded", () => {
                     const waterContainer = document.querySelector('.water-container');
                     const text = document.querySelector('.image-container span');
                     const ship = document.querySelector('.layer11');

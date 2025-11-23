@@ -1222,30 +1222,6 @@ header::before {
 }
 
 
-/* Active State (เมื่อ JS ใส่ class .show) */
-
-.testContainer h1.show,
-.testContainer h2.show,
-.imageBox.show {
-    animation: fadeUp2 0.6s ease-out forwards;
-}
-
-
-/* Delay Animation ให้ขึ้นทีละตัว */
-
-.imageBox:nth-child(1).show {
-    animation-delay: 0.2s;
-}
-
-.imageBox:nth-child(2).show {
-    animation-delay: 0.4s;
-}
-
-.imageBox:nth-child(3).show {
-    animation-delay: 0.6s;
-}
-
-
 /* Yellow (Text Dark) */
 
 .sec-5 {
@@ -4250,4 +4226,117 @@ fishing-container1 {
     .chart-box {
         transform: scale(0.9);
     }
+}
+
+
+/* =========================================
+   Universal Scroll Animations (Fade Up)
+   ธีม: ลอยขึ้นนุ่มๆ จากด้านล่าง (Consistent Style)
+========================================= */
+
+
+/* สถานะเริ่มต้น: ซ่อนและอยู่ต่ำกว่าปกตินิดหน่อย */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(100px);
+    /* เลื่อนลงมา 40px */
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Easing นุ่มๆ */
+    will-change: opacity, transform;
+}
+
+
+/* สถานะแสดงผล: ปรากฏและกลับที่เดิม */
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- Stagger Delays (ดีเลย์ให้ขึ้นทีละนิด ไม่แย่งกันขึ้น) --- */
+
+.delay-100 {
+    transition-delay: 0.1s;
+}
+
+.delay-200 {
+    transition-delay: 0.2s;
+}
+
+.delay-300 {
+    transition-delay: 0.3s;
+}
+
+.delay-400 {
+    transition-delay: 0.4s;
+}
+
+
+/* =========================================
+   Universal Hover Effects
+   สำหรับสิ่งที่กดได้ หรือควรเน้น
+========================================= */
+
+
+/* การ์ดและกล่องข้อมูล */
+
+.stat-card,
+.box-white,
+.image-wrapper,
+.chart-box,
+.fish-description,
+.sec10-right,
+.may-inforright,
+.may-videoleft,
+.brown-boxright,
+.brown-boxleft {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.stat-card:hover,
+.box-white:hover,
+.chart-box:hover {
+    transform: translateY(-10px);
+    /* ลอยขึ้น */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    /* เงาฟุ้งขึ้น */
+}
+
+
+/* รูปภาพทั่วไป */
+
+.slide-img img,
+.imageBox img,
+.criticalpicture,
+.image-fishing img,
+.image-fishing1 img {
+    transition: transform 0.5s ease;
+}
+
+.slide-img:hover img,
+.imageBox:hover img {
+    transform: scale(1.05);
+    /* ขยายเล็กน้อย */
+}
+
+
+/* ปุ่มกดต่างๆ */
+
+button,
+.nav-btn,
+.scroll-btn,
+.start-btn,
+.restart-btn,
+.option-btn {
+    transition: all 0.3s ease;
+}
+
+button:hover,
+.nav-btn:hover,
+.scroll-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(233, 90, 12, 0.4);
+    /* เงาสีส้ม */
 }
