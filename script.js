@@ -154,45 +154,43 @@
                     });
                 });
 
+                // =======================
+                // Slider Logic (Sec-7) - แก้ไขแล้ว
+                // =======================
                 let slideIndex = 0;
 
+                // ฟังก์ชันกดที่จุด (Dot)
                 function currentSlide(n) {
                     showSlides(slideIndex = n);
                 }
 
-                function showSlides(n) {
-                    const track = document.getElementById('sliderTrack');
-                    const dots = document.querySelectorAll('.dot');
-                    const slides = document.querySelectorAll('.slide-item');
-
-                    if (n >= slides.length) { slideIndex = 0; }
-                    if (n < 0) { slideIndex = slides.length - 1; }
-
-                    track.style.transform = `translateX(-${slideIndex * 100}%)`;
-
-                    dots.forEach(dot => dot.classList.remove('active'));
-                    dots[slideIndex].classList.add('active');
-                }
-
+                // ฟังก์ชันกดปุ่ม Next/Prev
                 function plusSlides(n) {
                     showSlides(slideIndex += n);
                 }
 
                 function showSlides(n) {
                     const track = document.getElementById('sliderTrack');
-                    const dots = document.querySelectorAll('.dot');
-                    const slides = document.querySelectorAll('.slide-item');
+
+                    // ⭐ แก้ตรงนี้: หา slide-item เฉพาะที่อยู่ใน sliderTrack เท่านั้น
+                    // เพื่อไม่ให้ไปนับรวมกับของ Sec-18
+                    const slides = track.querySelectorAll('.slide-item');
+
+                    const dots = document.querySelectorAll('.slider-dots .dot'); // เจาะจง class แม่ของ dot ด้วย
+
+                    // ตรวจสอบเงื่อนไขวนลูป
                     if (n >= slides.length) { slideIndex = 0; }
                     if (n < 0) { slideIndex = slides.length - 1; }
 
+                    // สั่งเลื่อน
                     track.style.transform = `translateX(-${slideIndex * 100}%)`;
 
+                    // อัปเดตจุดสี
                     dots.forEach(dot => dot.classList.remove('active'));
                     if (dots[slideIndex]) {
                         dots[slideIndex].classList.add('active');
                     }
                 }
-
                 // เพิ่มการ Observe เฉพาะ Sec-10 เพื่อเล่นกราฟ
                 document.addEventListener("DOMContentLoaded", () => {
                     const sec10 = document.querySelector(".sec-10");

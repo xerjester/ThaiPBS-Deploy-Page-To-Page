@@ -2527,8 +2527,39 @@ img[alt="img-right"].show {
 /* Indigo */
 
 .sec-13 {
-    background-color: #8b5cf6;
+    background-color: #FBDC8F;
 }
+
+.mesh-container {
+    height: 140vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.image-mesh img {
+    width: 100%;
+    height: 140%;
+    object-fit: cover;
+    opacity: 0.8;
+    z-index: 0;
+}
+
+.text-mesh {
+    position: absolute;
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    top: 32%;
+    left: 20%;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgb(0, 0, 0);
+}
+
+.text-mesh span {
+    color: orangered;
+}
+
+@media (max-width: 768px) {}
 
 
 /* Violet */
@@ -2547,7 +2578,7 @@ img[alt="img-right"].show {
 .image-fishing img {
     position: relative;
     top: 210px;
-    opacity: 0.3;
+    opacity: 0;
     z-index: 0;
 }
 
@@ -3296,7 +3327,7 @@ fishing-container1 {
 
 .dot-story.active,
 .dot-story:hover {
-    background-color: #09324E;
+    background-color: #E65100;
     /* เปลี่ยนเป็นสีน้ำเงินเข้มให้ต่างจาก Sec 7 */
     transform: scale(1.2);
 }
