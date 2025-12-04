@@ -292,13 +292,18 @@
                 document.addEventListener("DOMContentLoaded", () => {
                     const popupOverlay = document.getElementById('mobile-popup');
                     const popupBody = document.getElementById('popup-body');
-                    const closeBtn = document.querySelector('.close-btn');
+
+                    // ⭐ แก้จาก: const closeBtn = document.querySelector('.close-btn');
+                    // ⭐ เป็น:
+                    const closeBtn = popupOverlay.querySelector('.close-btn');
+                    // (ใช้ popupOverlay.querySelector เพื่อหาปุ่มเฉพาะในกล่องนี้เท่านั้น)
+
                     const allPins = document.querySelectorAll('[class^="pin-btn"]');
 
                     // ฟังก์ชันเปิด Popup
                     function openPopup(content) {
-                        popupBody.innerHTML = content; // เอาเนื้อหา html ใส่เข้าไป
-                        popupOverlay.classList.add('active'); // แสดง Popup
+                        popupBody.innerHTML = content;
+                        popupOverlay.classList.add('active');
                     }
 
                     // ฟังก์ชันปิด Popup
@@ -324,8 +329,9 @@
                         });
                     });
 
-                    // กดปุ่ม X เพื่อปิด
-                    closeBtn.addEventListener('click', closePopup);
+                    if (closeBtn) { // เพิ่มการเช็คกัน error เล็กน้อย
+                        closeBtn.addEventListener('click', closePopup);
+                    }
 
                     // กดพื้นที่ว่างๆ (Backdrop) เพื่อปิด
                     popupOverlay.addEventListener('click', (e) => {
@@ -526,3 +532,46 @@
                         dots[storyIndex].classList.add('active');
                     }
                 }
+
+                /* ======================================================
+   ADDON: Sec-4 Plant Popup Logic
+   (คลิกที่ต้นไม้ใน Sec-4 แล้วเด้ง Popup ข้อมูล)
+====================================================== */
+                document.addEventListener("DOMContentLoaded", () => {
+                    // 1. ตัวแปรสำหรับ Popup (ใช้ตัวเดียวกับของแผนที่)
+                    const popupOverlay = document.getElementById('mobile-popup');
+                    const popupBody = document.getElementById('popup-body');
+                    const plantBoxes = document.querySelectorAll('.sec-4 .imageBox');
+
+                    // 2. ฟังก์ชันเปิด Popup
+                    function openPlantPopup(name, desc, imgSrc) {
+                        // สร้าง HTML สำหรับใส่ใน Popup
+                        const content = `
+            <div style="text-align: center; padding: 10px;">
+                <h3 style="color: orangered; font-size: 24px; margin-bottom: 10px;">${name}</h3>
+                <div style="width: 60px; height: 3px; background: #e95a0c; margin: 0 auto 15px auto;"></div>
+                <p style="text-align: left; color: #333; font-size: 16px; line-height: 1.6;">
+                    ${desc}
+                </p>
+            </div>
+        `;
+
+                        popupBody.innerHTML = content;
+                        popupOverlay.classList.add('active'); // สั่งให้แสดงผล
+                    }
+
+                    // 3. วนลูปใส่ Event Click ให้ทุกกล่อง
+                    plantBoxes.forEach(box => {
+                        box.addEventListener('click', () => {
+                            const name = box.getAttribute('data-name'); // ดึงชื่อ
+                            const desc = box.getAttribute('data-desc'); // ดึงคำบรรยาย
+                            const img = box.querySelector('img').src; // ดึงรูปภาพเดิมมาโชว์
+
+                            if (name && desc) {
+                                openPlantPopup(name, desc, img);
+                            }
+                        });
+                    });
+
+                    // หมายเหตุ: ปุ่มปิด (X) ทำงานได้อยู่แล้วจากโค้ดชุดเดิมของ Map Popup
+                });
