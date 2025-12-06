@@ -18,6 +18,22 @@ body {
     margin: 0;
 }
 
+
+/* บังคับทุก Section ให้ยืดหยุ่น */
+
+.full-section,
+section[class^="sec-"] {
+    width: 100%;
+    min-height: auto;
+    /* ปลดล็อกความสูง */
+    padding: var(--spacing-section) 5%;
+    /* บนล่างตามสูตร, ซ้ายขวา 5% */
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #map {
     height: 1400px;
 }
@@ -95,7 +111,7 @@ header {
     right: 400px;
     transform: translateX(-100px);
     /* เริ่มต้นอยู่ทางซ้าย */
-    animation: slideIn 2s ease-out forwards;
+    animation: slideIn 500ms ease-out forwards;
 }
 
 .secondperson {
@@ -111,7 +127,7 @@ header {
     opacity: 0;
     margin: 20px 0;
     transform: translateX(100px);
-    animation: slideInRight 2s ease-out 1s forwards;
+    animation: slideInRight 1s ease-out 250ms forwards;
 }
 
 @keyframes slideInRight {
@@ -156,6 +172,13 @@ header .overlay {
 .hero-text {
     position: relative;
     z-index: 1;
+    transition: 1s;
+    animation: float 1s ease-in-out infinite alternate;
+    opacity: 0;
+}
+
+.hero-text.show {
+    opacity: 1;
 }
 
 .hero-text h1 {
@@ -485,7 +508,7 @@ header::before {
 
 .sec-2 {
     background-color: #FBDC8F;
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1775,107 +1798,167 @@ img[alt="img-right"].show {
 }
 
 
-/* Emerald */
+/* ตั้งค่าพื้นฐาน */
+
+* {
+    box-sizing: border-box;
+}
 
 .sec-8 {
     background-color: #FBDC8F;
+    padding: 60px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
-/* text-may */
+/* หัวข้อ */
 
-.sec-8 h1 {
+.sec-8 h1.text-may {
     color: #E95A0C;
-    font-size: 64px;
-    position: relative;
-    left: 0%;
-    top: -35%;
+    font-size: clamp(32px, 5vw, 64px);
+    /* ปรับขนาดอัตโนมัติตามจอ */
     text-align: center;
     font-weight: bold;
+    margin-bottom: 60px;
+    line-height: 1.2;
 }
 
 
-/* brown-box */
+/* คอนเทนเนอร์หลัก จัดเรียงซ้ายขวา */
 
-.brown-boxright {
+.may-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* จัดให้เริ่มบนเท่ากัน */
+    gap: 60px;
+    /* ระยะห่างระหว่างกล่องซ้าย-ขวา */
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    /* หัวใจสำคัญ: ยอมให้ตกบรรทัดเมื่อจอเล็ก */
+}
+
+
+/* ตัวห่อหุ้มแต่ละก้อน (เพื่อให้เงาเกาะติดเนื้อหา) */
+
+.content-wrapper {
+    position: relative;
+    width: 45%;
+    /* จอคอมกว้าง 45% */
+    min-width: 320px;
+    /* ห้ามเล็กกว่านี้ */
+}
+
+
+/* เงาสีน้ำตาล (ใช้ class เดียวกันทั้ง 2 กล่อง) */
+
+.brown-shadow {
     background-color: #834929;
-    border-radius: 10%;
+    border-radius: 30px;
     position: absolute;
-    height: 490px;
-    width: 25%;
-    left: 53%;
-    top: 32%;
-    z-index: 10;
+    top: 20px;
+    /* ระยะเยื้องลง */
+    left: 20px;
+    /* ระยะเยื้องขวา */
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
-.brown-boxleft {
-    background-color: #834929;
-    border-radius: 10%;
-    position: absolute;
-    height: 435px;
-    width: 28%;
-    left: 21%;
-    top: 32%;
-    z-index: 10;
-}
 
-.may-inforright {
+/* กล่องเนื้อหาสีครีม */
+
+.content-box {
     background-color: #FAEBD6;
-    border-radius: 10%;
-    position: absolute;
-    height: 500px;
-    width: 25%;
-    left: 54%;
-    top: 28%;
-    z-index: 11;
+    border-radius: 30px;
+    position: relative;
+    z-index: 2;
+    /* อยู่เหนือเงา */
+    padding: 40px;
+    min-height: 450px;
+    /* ความสูงขั้นต่ำให้ดูสวย */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.may-inforright p {
-    font-size: 36px;
+
+/* --- สไตล์เฉพาะกล่องข้อความ --- */
+
+.info-box p {
+    font-size: 24px;
     color: #000000;
     text-align: center;
-    position: relative;
-    top: -10%;
     font-weight: bold;
+    line-height: 1.6;
+    margin: 0;
 }
 
-.may-inforright span {
+.info-box span {
     color: #E95A0C;
     font-weight: bold;
+    font-size: 1.2em;
+    /* ใหญ่กว่าปกตินิดนึง */
 }
 
-.may-videoleft {
-    background-color: #FAEBD6;
-    border-radius: 10%;
-    position: absolute;
-    height: 400px;
-    width: 28%;
-    left: 22%;
-    top: 28%;
-    z-index: 11;
-}
 
-.may-videoleft iframe {
-    border-radius: 10%;
-    position: relative;
-    border: none;
-    height: 300px;
-    width: 90%;
-    top: 10%;
-    left: 5%;
+/* --- สไตล์เฉพาะกล่องวิดีโอ --- */
+
+.video-box iframe {
+    border-radius: 15px;
+    width: 100%;
+    height: 250px;
+    /* ความสูงวิดีโอ */
+    margin-bottom: 20px;
 }
 
 .spantwo {
-    color: #FAEBD6;
-    position: absolute;
-    top: 71%;
-    left: 23%;
-    z-index: 12;
+    color: #834929;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 .spantwo a {
-    color: #FAEBD6;
+    color: #E95A0C;
     text-decoration: underline;
+    word-break: break-all;
+    /* ป้องกันลิงก์ยาวล้นจอ */
+}
+
+
+/* --- Responsive สำหรับมือถือ/แท็บเล็ต --- */
+
+@media screen and (max-width: 900px) {
+    .may-container {
+        flex-direction: column;
+        /* เรียงลงมาเป็นแนวตั้ง */
+        align-items: center;
+        gap: 50px;
+    }
+    .content-wrapper {
+        width: 90%;
+        /* ขยายเกือบเต็มจอในมือถือ */
+        min-width: auto;
+    }
+    .content-box {
+        min-height: auto;
+        /* ความสูงตามเนื้อหาจริง ไม่ต้อง fix */
+        padding: 30px 20px;
+    }
+    .info-box p {
+        font-size: 20px;
+        /* ลดขนาดตัวหนังสือให้อ่านง่าย */
+    }
+    .brown-shadow {
+        top: 10px;
+        left: 10px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -2499,261 +2582,286 @@ img[alt="img-right"].show {
     }
 }
 
+
+/* พื้นหลังสีเหลือง */
+
 .sec-13 {
     background-color: #FBDC8F;
+    position: relative;
+    /* สำคัญ: เป็นจุดอ้างอิงให้ลูก */
 }
 
 .mesh-container {
-    height: 140vh;
+    position: relative;
     width: 100%;
+    min-height: 100vh;
+    /* ใช้ min-height แทน height เพื่อให้ยืดตามเนื้อหาได้ถ้าจำเป็น */
     overflow: hidden;
+    display: flex;
+    /* ใช้ Flexbox ช่วยจัดกึ่งกลาง */
+    justify-content: center;
+    align-items: center;
 }
 
-.image-mesh img {
+
+/* จัดการรูปภาพให้เป็น Background เต็มพื้นที่ */
+
+.image-mesh {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 140%;
-    object-fit: cover;
+    height: 100%;
     opacity: 0.8;
     z-index: 0;
 }
 
+.image-mesh img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* ให้รูปเต็มพื้นที่โดยไม่เสียสัดส่วน */
+    opacity: 0.8;
+}
+
+
+/* จัดการข้อความ */
+
 .text-mesh {
-    position: absolute;
-    font-size: 60px;
-    font-weight: bold;
-    text-align: center;
-    top: 32%;
-    left: 20%;
+    position: relative;
+    /* ให้ลอยอยู่เหนือรูป */
     z-index: 1;
-    text-shadow: 0 2px 4px rgb(0, 0, 0);
+    width: 100%;
+    /* ให้กว้างเกือบเต็มจอ แต่เหลือขอบข้างไว้ */
+    max-width: 1000px;
+    /* ไม่ให้กว้างเกินไปในจอคอม */
+    padding: 20px;
+}
+
+
+/* ปรับแต่งตัวอักษร */
+
+.text-mesh h1 {
+    font-weight: bold;
+    color: #ffffff;
+    /* หรือสีที่คุณต้องการ (เดิมไม่มีสี กำหนดเป็นขาวให้อ่านง่ายขึ้นบนรูป) */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    /* เพิ่มความเข้มเงาให้อ่านง่ายขึ้น */
+    margin: 0;
+    line-height: 1.4;
+    /* เทคนิค Responsive Text: ปรับขนาดตามหน้าจออัตโนมัติ */
+    /* clamp(ขนาดเล็กสุด, ขนาดตามจอ, ขนาดใหญ่สุด) */
+    text-align: center;
+    font-size: clamp(24px, 5vw, 60px);
 }
 
 .text-mesh span {
     color: orangered;
+    /* ช่วยให้การเว้นวรรคสวยขึ้น */
 }
 
 
-/* Violet */
+/* --- Responsive สำหรับมือถือ --- */
+
+@media screen and (max-width: 768px) {
+    .mesh-container {
+        min-height: 80vh;
+        /* ในมือถืออาจจะไม่ต้องสูงเท่าคอมก็ได้ */
+    }
+    .text-mesh h1 br {
+        display: none;
+        /* ซ่อนการขึ้นบรรทัดใหม่แบบ fix ในมือถือ เพื่อให้ text flow เอง */
+    }
+}
 
 .sec-14 {
     background-color: #FBDC8F;
 }
 
 .fishing-container {
-    position: relative;
+    min-height: 100vh;
+    padding: 60px 20px;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    align-items: center;
+    position: relative;
 }
 
-.image-fishing img {
+.header-box {
     position: relative;
-    top: 210px;
-    opacity: 0;
-    z-index: 0;
+    z-index: 2;
+    text-align: center;
+    margin-top: 100px;
+    margin-left: -25%;
+    width: 100%;
+    max-width: 900px;
 }
 
 .text-fishing {
     color: #09324E;
-    position: absolute;
-    font-size: 58.5px;
+    font-size: clamp(24px, 4vw, 48px);
     font-weight: bold;
-    text-align: center;
-    top: 10%;
-    left: 17%;
-}
-
-.e-1 {
-    position: absolute;
-    width: 27%;
-    height: 75%;
-    left: 7%;
-    top: 15%;
-    z-index: 1;
-}
-
-.e-3 {
-    position: absolute;
-    width: 27%;
-    height: 70%;
-    left: 45%;
-    top: 30%;
-    z-index: 1;
-}
-
-.e-2 {
-    position: absolute;
-    width: 27%;
-    height: 70%;
-    left: 70%;
-    top: 5%;
-    z-index: 1;
+    line-height: 1.4;
 }
 
 .text-fishing span {
     color: #E95A0C;
-    font-size: 70px;
+    font-size: 1.2em;
+    display: inline-block;
 }
 
-@media (max-width: 768px) {
-    .fishing-container {
-        display: flex;
+.gallery-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+    flex-wrap: wrap;
+    transform: scale(1);
+    margin-top: -10%;
+}
+
+.item-box {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.item-box img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+@media screen and (min-width: 900px) {
+    .box-left {
+        margin-top: 150px;
+    }
+    .box-center {
+        margin-top: 250px;
+    }
+    .box-right {
+        margin-top: 0px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .gallery-wrapper {
         flex-direction: column;
-        justify-content: flex-start;
-        min-height: 100vh;
+        align-items: center;
+        gap: 40px;
     }
-    .image-fishing {
-        text-align: center;
-        margin-top: auto;
+    .item-box {
+        width: 80%;
+        margin-top: 0 !important;
     }
-    .image-fishing img {
-        height: 500px;
-        width: 100%;
-        top: 70px;
-        opacity: 0.5;
-    }
-    .text-fishing span {
-        font-size: 56px;
-    }
-    .text-fishing {
-        font-size: 35px;
-        text-align: center;
-        top: 10%;
-        left: 20%;
-    }
-    .e-1 {
-        width: 33%;
-        height: 46%;
-        left: -1%;
-        top: 20%;
-    }
-    .e-3 {
-        width: 33%;
-        height: 46%;
-        left: 35%;
-        top: 25%;
-    }
-    .e-2 {
-        width: 33%;
-        height: 46%;
-        left: 68%;
-        top: 25%;
+    .text-fishing br {
+        display: none;
     }
 }
-
-
-/* Purple */
 
 .sec-15 {
     background-color: #FBDC8F;
+    position: relative;
 }
 
-.fishing-container1 {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.image-fishing1 img {
-    position: relative;
-    top: 210px;
-    opacity: 0.3;
+.bg-texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 0;
+    pointer-events: none;
+    opacity: 0.3;
 }
 
-.text-fishing1 {
-    color: #09324E;
-    position: absolute;
-    font-size: 68.5px;
-    font-weight: bold;
+.bg-texture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* --- ปรับแต่ง Header เฉพาะ Sec 15 --- */
+
+.sec-15-header {
+    position: relative;
+    z-index: 2;
     text-align: center;
-    top: 10%;
-    left: 23%;
+    margin-top: 100px;
+    margin-left: -25%;
+    width: 100%;
+    max-width: 900px;
 }
 
-.text-fishing1 span {
-    color: #E95A0C;
+.text-fishing-15 {
+    color: #09324E;
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: bold;
+    line-height: 1.4;
 }
 
-.e-4 {
-    position: absolute;
-    width: 27%;
-    height: 70%;
-    left: 7%;
-    top: 30%;
-    z-index: 1;
+.sec-14 .item-box {
+    opacity: 0;
 }
 
-.e-5 {
-    transform: rotate(30deg);
-    position: absolute;
-    width: 27%;
-    height: 70%;
-    left: 45%;
-    top: 35%;
-    z-index: 1;
+.sec-14 .item-box.show {
+    opacity: 1;
 }
 
-.e-6 {
-    position: absolute;
-    width: 27%;
-    height: 70%;
-    left: 70%;
-    top: -5%;
-    z-index: 1;
+.sec-15 .item-box {
+    opacity: 0;
 }
 
-@media (max-width: 768px) {
-    .fishing-container1 {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        min-height: 100vh;
+.sec-15 .item-box.show {
+    opacity: 1;
+}
+
+
+/* --- จัดวางตำแหน่งรูปภาพ (Desktop) --- */
+
+@media screen and (min-width: 900px) {
+    /* ซ้าย (e-4): วางระดับกลางๆ */
+    .box-15-left {
+        margin-top: 150px;
     }
-    .image-fishing1 {
-        text-align: center;
-        margin-top: auto;
+    /* กลาง (e-5): วางต่ำสุด + หมุน */
+    .box-15-center {
+        margin-top: 250px;
+        transform: rotate(30deg);
+        /* เพิ่มลูกเล่นหมุนเฉพาะรูปนี้ */
     }
-    .image-fishing1 img {
-        height: 500px;
-        width: 100%;
-        top: 70px;
-        opacity: 0.5;
-    }
-    .text-fishing1 span {
-        font-size: 56px;
-        top: -20px;
-    }
-    .text-fishing1 {
-        font-size: 35px;
-        text-align: center;
-        top: 10%;
-        left: 32%;
-    }
-    .e-4 {
-        width: 33%;
-        height: 46%;
-        left: 0%;
-        top: 25%;
-    }
-    .e-5 {
-        transform: rotate(55deg);
-        width: 33%;
-        height: 46%;
-        left: 38.3%;
-        top: 25%;
-    }
-    .e-6 {
-        width: 33%;
-        height: 46%;
-        left: 70%;
-        top: 25%;
+    /* ขวา (e-6): วางสูงสุด (ดึงขึ้นไปหาข้อความ) */
+    .box-15-right {
+        margin-top: -50px;
+        /* ค่าลบเพื่อดึงขึ้น */
     }
 }
 
 
-/* Fuchsia */
+/* --- Responsive มือถือ (Overwrite ของ Sec 14) --- */
+
+@media screen and (max-width: 900px) {
+    /* รีเซ็ต Margin และ Rotation ในมือถือ */
+    .box-15-left,
+    .box-15-center,
+    .box-15-right {
+        margin-top: 0 !important;
+        transform: none !important;
+        /* ยกเลิกการหมุนให้เรียงสวยๆ */
+    }
+    /* ปรับขนาดข้อความในมือถือไม่ให้ใหญ่คับจอ */
+    .text-fishing-15 {
+        font-size: clamp(28px, 6vw, 40px);
+    }
+}
 
 
 /* =======================
@@ -3272,20 +3380,9 @@ img[alt="img-right"].show {
     }
 }
 
-
-/* Rose */
-
 .sec-18 {
     background-color: #FBDC8F;
 }
-
-
-/* =======================
-   Sec-18 Story Styles
-======================= */
-
-
-/* จุด Dot สำหรับ Story Slider */
 
 .dot-story {
     width: 15px;
@@ -3303,37 +3400,87 @@ img[alt="img-right"].show {
     transform: scale(1.2);
 }
 
-
-/* =======================
-   Section 18 Layout Adjustments (Wider Box)
-======================= */
-
-
-/* 1. ขยายกล่องให้กว้างขึ้นเฉพาะ Section 18 */
-
-.main-title {
+.sec-18 .crisis-container {
     position: relative;
-    color: #09324E;
-    margin-top: -35%;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+
+/* 3. แก้ไขหัวข้อ (ลบค่าติดลบที่ทำให้ลอยสูงเกินไป) */
+
+.sec-18 .main-title {
+    position: relative;
+    margin-top: 0 !important;
+    /* ยกเลิกค่า -35% เดิม */
+    margin-bottom: 10px;
+    top: auto;
+    text-align: center;
     z-index: 10;
 }
 
-.sec-18 .card-wrapper,
-.sec-18 .box-white {
-    position: absolute;
-    top: 10%;
-    max-width: 1300px !important;
-    /* ขยายจาก 1000px เป็น 1300px */
+
+/* 4. กล่องห่อหุ้ม Card (ให้กลับมาไหลตามธรรมชาติ) */
+
+.sec-18 .card-wrapper {
+    position: relative !important;
+    /* เปลี่ยนจาก absolute เป็น relative */
+    top: auto !important;
+    left: auto;
     width: 100%;
-    /* ให้เกือบเต็มจอในจอเล็ก */
+    max-width: 100%;
+    /* ให้กว้างเต็ม container (1000px) */
+    min-height: auto;
+    margin: 0 auto;
 }
 
+
+/* 5. กล่องขาวเนื้อหา */
+
+.sec-18 .box-white {
+    position: relative !important;
+    top: auto !important;
+    width: 100%;
+    max-width: 100% !important;
+    padding: 40px;
+    border-radius: 30px;
+    background-color: #FFF8F0;
+}
+
+
+/* 6. กล่องส้มรองหลัง (ปรับให้เกาะติดกล่องขาว) */
+
 .sec-18 .box-orange {
-    position: absolute;
-    left: -2%;
-    top: 25%;
-    height: 130%;
-    width: 105%;
+    position: absolute !important;
+    top: 15px;
+    left: 15px;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    z-index: -1;
+}
+
+
+/* --- Responsive สำหรับจอเล็ก --- */
+
+@media (max-width: 768px) {
+    .sec-18 .crisis-container {
+        max-width: 90%;
+        /* จอมือถือให้กว้าง 90% */
+    }
+    .sec-18 .box-white {
+        padding: 25px;
+        /* ลด Padding ในมือถือ */
+    }
+    .sec-18 .box-orange {
+        top: 10px;
+        left: 10px;
+    }
 }
 
 
@@ -4322,97 +4469,6 @@ button:hover,
 }
 
 
-/* .sec-13 */
-
-
-/* < 480px */
-
-@media (max-width: 480px) {
-    .mesh-container {
-        height: 60vh;
-        width: 100%;
-    }
-    .text-mesh {
-        font-size: 12px;
-        font-weight: bold;
-        text-align: center;
-        top: 45%;
-        left: 3%;
-    }
-}
-
-
-/* 481 - 768px */
-
-@media (min-width: 481px) and (max-width: 768px) {
-    .mesh-container {
-        height: 50vh;
-        width: 100%;
-    }
-    .text-mesh {
-        font-size: 32px !important;
-        font-weight: bold;
-        text-align: center;
-        top: 40%;
-        left: 10%;
-    }
-}
-
-
-/* 769 - 1024px */
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .mesh-container {
-        height: 60vh;
-        width: 100%;
-    }
-    .text-mesh {
-        font-size: 37px !important;
-        font-weight: bold;
-        text-align: center;
-        top: 43.5%;
-        left: 13.5%;
-    }
-}
-
-
-/* 1025 - 1280px */
-
-@media (min-width: 1025px) and (max-width: 1280px) {
-    .mesh-container {
-        height: 70vh;
-        width: 100%;
-    }
-    .text-mesh {
-        font-size: 45px !important;
-        font-weight: bold;
-        text-align: center;
-        top: 47%;
-        left: 16.5%;
-    }
-}
-
-
-/* 1281 - 1440px */
-
-@media (min-width: 1281px) and (max-width: 1440px) {
-    .mesh-container {
-        height: 80vh;
-        width: 100%;
-    }
-    .text-mesh {
-        font-size: 50px !important;
-        font-weight: bold;
-        text-align: center;
-        top: 46%;
-        left: 15%;
-    }
-}
-
-
-/* .sec-14 */
-
-
 /* < 480px */
 
 @media (max-width: 480px) {
@@ -5338,4 +5394,53 @@ button:hover,
         background: rgba(255, 255, 255, 0.98) !important;
         border: 2px solid orangered;
     }
+}
+
+
+/* =======================
+   Fix Animation for Sec 14 & 15
+======================= */
+
+
+/* Sec 14: ให้กล่องเด้งขึ้นมา */
+
+.sec-14 .item-box.reveal {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sec-14 .item-box.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Sec 15: พิเศษ! ให้รูปข้างในเด้งขึ้นมา (เพื่อไม่ให้ทับกับ Box ที่หมุนเอียงอยู่) */
+
+.sec-15 .item-box img.reveal {
+    opacity: 0;
+    transform: translateY(100px) scale(0.8);
+    /* เริ่มต้นเล็กหน่อยและอยู่ต่ำ */
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sec-15 .item-box img.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+
+/* Stagger Delay Classes (ถ้ายังไม่มี ให้เพิ่มอันนี้ครับ) */
+
+.delay-100 {
+    transition-delay: 0.1s;
+}
+
+.delay-200 {
+    transition-delay: 0.2s;
+}
+
+.delay-300 {
+    transition-delay: 0.3s;
 }

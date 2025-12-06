@@ -189,7 +189,7 @@
                     }, { threshold: 0.2 });
 
                     // ✅ ระบุ element ที่ต้องการให้มีอนิเมชันตอน scroll เข้ามา
-                    document.querySelectorAll("#about, #aboutinfo, #abouttext, #test, #picture, .observe, .water-container, .image-container, .pin-btn1, .pin-btn2, .pin-btn3, .pin-btn4, .pin-btn5, .pin-btn6,.pin-btn7 ,.pin-btn8 , .image-container span, .layer11, .orengeContainer1, .orengeContainer2, .orengeContainer3, .testheadtext, .img1, .img2, .img3, .imageBox p, .testContainer h2, #test img\[alt=\"bottom-img\"\], img\[alt=\"img-left\"\], img\[alt=\"img-right\"\], .fourthpage h1, .ground, img\[alt=\"waterbottom-img\"\], .testContainer h1, .testContainer h2,  .imageBox, .imageBox img, .imageBox p, .May.report h1, .may-text, .may-card, .brownContainer1, .brownContainer2, .pollution h1, .brownreport, .report-box, .problem, .critical-image, .critical-text, .fishsec h1, .e-6, .e-2, .e-1, .fishsec h2, .e-3,.e-4, .e-5, .youngmekongriver h1, .f-1, .f-5, .critical-image1, .critical-image2, .critical-image3, .textyoungmekongriver1, .textyoungmekongriver2, .textyoungmekongriver3, .details1 h3, .details2 h3, .details3, .details3 h3, .fishsec .melt-img, .brownreportyoungmekongriver, .brownreportyoungmekongriver1, .brownreportyoungmekongriver2, .sec-6 h1")
+                    document.querySelectorAll("#about, #aboutinfo, #abouttext, #test, #picture, .observe, .water-container, .image-container, .pin-btn1, .pin-btn2, .pin-btn3, .pin-btn4, .pin-btn5, .pin-btn6,.pin-btn7 ,.pin-btn8 , .image-container span, .layer11, .orengeContainer1, .orengeContainer2, .orengeContainer3, .testheadtext, .img1, .img2, .img3, .imageBox p, .testContainer h2, #test img\[alt=\"bottom-img\"\], img\[alt=\"img-left\"\], img\[alt=\"img-right\"\], .fourthpage h1, .ground, img\[alt=\"waterbottom-img\"\], .testContainer h1, .testContainer h2,  .imageBox, .imageBox img, .imageBox p, .May.report h1, .may-text, .may-card, .brownContainer1, .brownContainer2, .pollution h1, .brownreport, .report-box, .problem, .critical-image, .critical-text, .fishsec h1, .e-6, .e-2, .e-1, .fishsec h2, .e-3,.e-4, .e-5, .youngmekongriver h1, .f-1, .f-5, .critical-image1, .critical-image2, .critical-image3, .textyoungmekongriver1, .textyoungmekongriver2, .textyoungmekongriver3, .details1 h3, .details2 h3, .details3, .details3 h3, .fishsec .melt-img, .brownreportyoungmekongriver, .brownreportyoungmekongriver1, .brownreportyoungmekongriver2, .sec-6 h1,.sec-14 .item-box,.sec-15 .item-box img,.sec-15 .item-box,.sec-14 .item-box,.hero-text")
                         .forEach(el => observer.observe(el));
                 });
 
@@ -202,7 +202,8 @@
 
                     // เก็บรายชื่อ Section ทั้งหมดที่ต้องการให้เลื่อนผ่าน
                     // (คุณสามารถเพิ่ม class หรือ id อื่นๆ ที่เป็น section หลักได้ที่นี่)
-                    const sections = Array.from(document.querySelectorAll('header, section.full-section'));
+                    // แก้ไฟล์ script.js บรรทัดเดิมเป็นบรรทัดนี้:
+                    const sections = Array.from(document.querySelectorAll('header, section.full-section, .sec-14, .sec-15'));
 
                     if (!scrollUpBtn || !scrollDownBtn) return;
 
